@@ -1,5 +1,4 @@
 import { User } from './user-class.model';
-import { Getter } from '.././getter.class'
 export enum Iresult_status{
     checked = "4.0"
 }
