@@ -35,36 +35,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var ConnectionClass_1 = require("./../ConnectionClass");
 require("reflect-metadata");
-var typeorm_1 = require("typeorm");
 var Student_1 = require("../src/entity/Student");
 var LoginController = /** @class */ (function () {
     function LoginController() {
     }
-    LoginController.prototype.createLogin = function () {
-        var _this = this;
-        typeorm_1.createConnection({
-            type: "mysql",
-            host: "localhost",
-            port: 3306,
-            username: "root",
-            password: "rootpassword",
-            database: "SLZ_Klausurvorbereitung",
-            entities: [
-                __dirname + "/entity/*.js"
-            ],
-            synchronize: true,
-        }).then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
-            var student, studentRepo;
+    LoginController.prototype.createLogin = function (mail, password, faculty) {
+        return __awaiter(this, void 0, void 0, function () {
+            var connection, student, studentRepo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        connection = ConnectionClass_1.ConnectionClass.getInstance();
                         student = new Student_1.Student();
                         //jetzt käme das ausgelesene Formular
-                        student.mail = "test@test.de";
-                        student.password = "testpwd";
+                        student.mail = mail;
+                        student.password = password;
                         student.active = false;
-                        student.faculty_id = 4;
+                        student.faculty_id = faculty;
                         studentRepo = connection.getRepository(Student_1.Student);
                         //persist?
                         return [4 /*yield*/, studentRepo.save(student)];
@@ -74,7 +63,7 @@ var LoginController = /** @class */ (function () {
                         return [2 /*return*/];
                 }
             });
-        }); }).catch(function (error) { return console.log(error); });
+        });
     };
     return LoginController;
 }());
