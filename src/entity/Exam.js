@@ -16,7 +16,7 @@ var Istatus;
     Istatus[Istatus["EXAM_ARCHIVED"] = 1] = "EXAM_ARCHIVED";
     Istatus[Istatus["EXAM_WAITING"] = 2] = "EXAM_WAITING";
     Istatus[Istatus["EXAM_UPCOMING"] = 3] = "EXAM_UPCOMING";
-})(Istatus || (Istatus = {}));
+})(Istatus = exports.Istatus || (exports.Istatus = {}));
 var Exam = /** @class */ (function () {
     function Exam() {
     }
@@ -45,11 +45,15 @@ var Exam = /** @class */ (function () {
         __metadata("design:type", Number)
     ], Exam.prototype, "status", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({
+            default: false
+        }),
         __metadata("design:type", Boolean)
     ], Exam.prototype, "result_status", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({
+            default: false
+        }),
         __metadata("design:type", Boolean)
     ], Exam.prototype, "reminder_status", void 0);
     Exam = __decorate([

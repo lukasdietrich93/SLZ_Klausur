@@ -1,7 +1,6 @@
-import { Student } from './Student';
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
-enum Istatus{
+export enum Istatus{
     EXAM_DELETED,
     EXAM_ARCHIVED,
     EXAM_WAITING,
@@ -29,10 +28,14 @@ export class Exam {
     @Column()
         status: Istatus;
 
-    @Column()
+    @Column({
+        default:false
+    })
         result_status: boolean;
 
-    @Column()
+    @Column({
+        default: false
+    })
         reminder_status: boolean;
     
    /* @OneToOne(() => Student)

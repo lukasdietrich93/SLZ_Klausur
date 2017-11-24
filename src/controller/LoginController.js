@@ -35,9 +35,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var ConnectionClass_1 = require("./../ConnectionClass");
+var ConnectionClass_1 = require("../class/ConnectionClass");
+var Student_1 = require("../entity/Student");
+var Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
-var Student_1 = require("../src/entity/Student");
 var LoginController = /** @class */ (function () {
     function LoginController() {
     }
@@ -46,9 +47,9 @@ var LoginController = /** @class */ (function () {
             var connection, student, studentRepo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        connection = ConnectionClass_1.ConnectionClass.getInstance();
-                        console.log(connection);
+                    case 0: return [4 /*yield*/, ConnectionClass_1.ConnectionClass.getInstance()];
+                    case 1:
+                        connection = _a.sent();
                         student = new Student_1.Student();
                         //jetzt käme das ausgelesene Formular
                         student.mail = mail;
@@ -58,8 +59,32 @@ var LoginController = /** @class */ (function () {
                         studentRepo = connection.getRepository(Student_1.Student);
                         //persist?
                         return [4 /*yield*/, studentRepo.save(student)];
-                    case 1:
+                    case 2:
                         //persist?
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    LoginController.prototype.createExam = function (name, date, total_hours, spent_hours, status) {
+        return __awaiter(this, void 0, void 0, function () {
+            var connection, exam, examRepo;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, ConnectionClass_1.ConnectionClass.getInstance()];
+                    case 1:
+                        connection = _a.sent();
+                        exam = new Exam_1.Exam();
+                        //jetzt käme das ausgelesene Formular
+                        exam.name = name;
+                        exam.date = date;
+                        exam.total_hours = total_hours;
+                        exam.spent_hours = spent_hours;
+                        exam.status = status;
+                        examRepo = connection.getRepository(Exam_1.Exam);
+                        return [4 /*yield*/, examRepo.save(exam)];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }
