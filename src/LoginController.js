@@ -48,6 +48,7 @@ var LoginController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         connection = ConnectionClass_1.ConnectionClass.getInstance();
+                        console.log(connection);
                         student = new Student_1.Student();
                         //jetzt käme das ausgelesene Formular
                         student.mail = mail;

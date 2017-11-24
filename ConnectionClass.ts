@@ -4,8 +4,8 @@ import "reflect-metadata";
 
 export class ConnectionClass {
     public static _instance;
-    private constructor() {
-        const connection = createConnection({
+    public static createInstance(){
+        ConnectionClass._instance= createConnection({
             type: "mysql",
             host: "localhost",
             port: 3306,
@@ -16,18 +16,18 @@ export class ConnectionClass {
                 __dirname + "/entity/*.js"
             ],
             synchronize: true,
+            
         });
+        return ConnectionClass._instance;
     }
-        public static getInstance(){
-            if (!ConnectionClass._instance){
-                return ConnectionClass._instance;
-            }else{
-                let connection = new ConnectionClass;
-                return connection;
-            }
-    }
-}
-    
+    public static getInstance(){
+        if (!ConnectionClass._instance)
+        {
+            ConnectionClass._instance = ConnectionClass.createInstance();
+        }
+        return ConnectionClass._instance;
+        }
+}    
 
 
 

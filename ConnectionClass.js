@@ -4,7 +4,9 @@ var typeorm_1 = require("typeorm");
 require("reflect-metadata");
 var ConnectionClass = /** @class */ (function () {
     function ConnectionClass() {
-        var connection = typeorm_1.createConnection({
+    }
+    ConnectionClass.createInstance = function () {
+        ConnectionClass._instance = typeorm_1.createConnection({
             type: "mysql",
             host: "localhost",
             port: 3306,
@@ -16,15 +18,13 @@ var ConnectionClass = /** @class */ (function () {
             ],
             synchronize: true,
         });
-    }
+        return ConnectionClass._instance;
+    };
     ConnectionClass.getInstance = function () {
         if (!ConnectionClass._instance) {
-            return ConnectionClass._instance;
+            ConnectionClass._instance = ConnectionClass.createInstance();
         }
-        else {
-            var connection = new ConnectionClass;
-            return connection;
-        }
+        return ConnectionClass._instance;
     };
     return ConnectionClass;
 }());

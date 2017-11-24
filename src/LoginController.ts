@@ -7,6 +7,7 @@ import { Student } from "../src/entity/Student";
 export class LoginController {
     public async createLogin(mail: string, password: string, faculty: number) {
         const connection = ConnectionClass.getInstance();
+        console.log(connection);
         
         let student = new Student();
         //jetzt käme das ausgelesene Formular
