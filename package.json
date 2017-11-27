@@ -19,8 +19,13 @@
    "homepage": "https://github.com/lukasdietrich93/SLZ_Klausur#readme",
    "dependencies": {
       "@types/node": "^8.0.53",
+      "koa": "^2.4.1",
+      "koa-body": "^2.5.0",
+      "koa-pug": "^3.0.0-2",
+      "koa-router": "^7.3.0",
       "math": "0.0.3",
       "mysql": "^2.14.1",
+      "nodemon": "^1.12.1",
       "pg": "^7.4.0",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.1.6",

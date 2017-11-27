@@ -7,6 +7,7 @@ import { Connection, createConnection } from "typeorm";
 
 
 export class LoginController {
+    
     public async createLogin(mail: string, password: string, faculty: number) {
         const connection: Connection = await ConnectionClass.getInstance();
        
