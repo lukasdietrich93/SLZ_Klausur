@@ -20,16 +20,21 @@ class LoginController {
     createLogin(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
-            let a = ctx.request.body;
-            let b = Object.values(a);
-            let student = new Student_1.Student();
-            student.mail = b[0];
-            student.password = b[1],
-                student.faculty_id = b[2];
-            student.active = false;
-            let studentRepo = connection.getRepository(Student_1.Student);
-            yield studentRepo.save(student);
-            ctx.render('success');
+            try {
+                let a = ctx.request.body;
+                let b = Object.values(a);
+                let student = new Student_1.Student();
+                student.mail = b[0];
+                student.password = b[1],
+                    student.faculty_id = b[2];
+                student.active = false;
+                let studentRepo = connection.getRepository(Student_1.Student);
+                yield studentRepo.save(student);
+                ctx.render('success');
+            }
+            catch (e) {
+                ctx.render('failed');
+            }
         });
     }
     createExam(name, date, total_hours, spent_hours, status) {
