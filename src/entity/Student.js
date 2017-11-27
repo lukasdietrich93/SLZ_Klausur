@@ -9,50 +9,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var Student = /** @class */ (function () {
-    function Student() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], Student.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Student.prototype, "mail", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Student.prototype, "password", void 0);
-    __decorate([
-        typeorm_1.Column({
-            default: false
-        }),
-        __metadata("design:type", Boolean)
-    ], Student.prototype, "active", void 0);
-    __decorate([
-        typeorm_1.Column({
-            default: 0
-        }),
-        __metadata("design:type", Number)
-    ], Student.prototype, "faculty_id", void 0);
-    __decorate([
-        typeorm_1.Column({
-            default: "01/01/1970"
-        }),
-        __metadata("design:type", String)
-    ], Student.prototype, "last_login", void 0);
-    __decorate([
-        typeorm_1.Column({
-            default: "01/01/1970"
-        }),
-        __metadata("design:type", String)
-    ], Student.prototype, "register_date", void 0);
-    Student = __decorate([
-        typeorm_1.Entity()
-    ], Student);
-    return Student;
-}());
+const typeorm_1 = require("typeorm");
+let Student = class Student {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], Student.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Student.prototype, "mail", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Student.prototype, "password", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: false
+    }),
+    __metadata("design:type", Boolean)
+], Student.prototype, "active", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: 0
+    }),
+    __metadata("design:type", String)
+], Student.prototype, "faculty_id", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: "01/01/1970"
+    }),
+    __metadata("design:type", String)
+], Student.prototype, "last_login", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: "01/01/1970"
+    }),
+    __metadata("design:type", String)
+], Student.prototype, "register_date", void 0);
+Student = __decorate([
+    typeorm_1.Entity()
+], Student);
 exports.Student = Student;
 //# sourceMappingURL=Student.js.map
