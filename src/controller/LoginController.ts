@@ -6,6 +6,7 @@ import "reflect-metadata";
 import { Connection, createConnection } from "typeorm";
 import * as Koa from "koa";
 import * as Router from "koa-router";
+import * as _ from 'lodash';
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
@@ -55,15 +56,15 @@ export class LoginController {
         //Set up Pug
         var Pug = require('koa-pug');
         var pug = new Pug({
-            viewPath: '../views',
-            basedir: '../views',
+            viewPath: '../src/views',
+            basedir: '../src/views',
             app: app //Equivalent to app.use(pug)
         });
         pug.use(app);
 
         //Set up body parsing middleware
         app.use(bodyParser({
-            formidable: { uploadDir: '/views' },
+            formidable: { uploadDir: '../src/views' },
             multipart: true,
             urlencoded: true
         }));
@@ -76,11 +77,13 @@ export class LoginController {
             ctx.render('form');
         }
         function handleForm(ctx: Router.IRouterContext, next: any) {
-            console.log(ctx.request.body);
+            var a = ctx.request.body;
+            let b = Object.values(a);
+            console.log(b);
         }
 
-        app.use(router.routes());
+            app.use(router.routes());
 
-        app.listen(3000);
+            app.listen(3000);
+        }
     }
-}

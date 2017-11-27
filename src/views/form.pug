@@ -4,11 +4,15 @@ html
    body
       form(action = "/", method = "POST")
          div
-            label(for = "say") Say: 
-            input(name = "say" value = "Hi")
+            label(for = "mail") E-Mail: 
+            input(name = "mail" value = "Ihre E-Mail Adresse")
          br
          div
-            label(for = "to") To: 
-            input(name = "to" value = "Koa form")
+            label(for = "password") Passwort: 
+            input(name = "password" value = "Passwort")
          br
-         button(type = "submit") Send my greetings
+         div
+            label(for = "faculty") Studiengang: 
+            input(name = "faculty" value = "Ihr Studiengang")
+         br
+         button(type = "submit") Senden

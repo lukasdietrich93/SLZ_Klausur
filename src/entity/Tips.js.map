@@ -1,1 +1,1 @@
-{"version":3,"file":"Tips.js","sourceRoot":"","sources":["Tips.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,mCAA+D;AAI/D;IAAA;IAQA,CAAC;IALO;QADH,gCAAsB,EAAE;;oCACV;IAGX;QADH,gBAAM,EAAE;;yCACW;IANX,IAAI;QADhB,gBAAM,EAAE;OACI,IAAI,CAQhB;IAAD,WAAC;CAAA,AARD,IAQC;AARY,oBAAI"}
+{"version":3,"file":"Tips.js","sourceRoot":"","sources":["Tips.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,qCAA+D;AAI/D,IAAa,IAAI,GAAjB;CAQC,CAAA;AALO;IADH,gCAAsB,EAAE;;gCACV;AAGX;IADH,gBAAM,EAAE;;qCACW;AANX,IAAI;IADhB,gBAAM,EAAE;GACI,IAAI,CAQhB;AARY,oBAAI"}

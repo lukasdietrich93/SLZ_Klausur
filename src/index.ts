@@ -10,4 +10,5 @@ let Login = new LoginController();
 Login.createLogin("12345","testpwd",4444);
 Login.createExam("testexam","30/01/1999",500,250,3);
 let RndTip = new TipController();
-RndTip.getRandomTip();
+// RndTip.getRandomTip();
+Login.login();
