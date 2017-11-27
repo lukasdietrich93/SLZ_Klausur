@@ -12,25 +12,24 @@ const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 const Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
-const Koa = require("koa");
-const Router = require("koa-router");
-const bodyParser = require('koa-body');
-const app = new Koa();
-const router = new Router();
 class LoginController {
-    createLogin(mail, password, faculty) {
+    renderLogin(ctx, next) {
+        console.log("test");
+        ctx.render('form');
+    }
+    createLogin(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let a = ctx.request.body;
+            let b = Object.values(a);
             let student = new Student_1.Student();
-            //jetzt käme das ausgelesene Formular
-            student.mail = mail;
-            student.password = password;
+            student.mail = b[0];
+            student.password = b[1],
+                student.faculty_id = b[2];
             student.active = false;
-            student.faculty_id = faculty;
-            //...weitere properties
             let studentRepo = connection.getRepository(Student_1.Student);
-            //persist?
             yield studentRepo.save(student);
+            ctx.render('success');
         });
     }
     createExam(name, date, total_hours, spent_hours, status) {
@@ -46,35 +45,6 @@ class LoginController {
             let examRepo = connection.getRepository(Exam_1.Exam);
             yield examRepo.save(exam);
         });
-    }
-    login() {
-        //Set up Pug
-        var Pug = require('koa-pug');
-        var pug = new Pug({
-            viewPath: '../src/views',
-            basedir: '../src/views',
-            app: app //Equivalent to app.use(pug)
-        });
-        pug.use(app);
-        //Set up body parsing middleware
-        app.use(bodyParser({
-            formidable: { uploadDir: '../src/views' },
-            multipart: true,
-            urlencoded: true
-        }));
-        router.get('/', renderForm);
-        router.post('/', handleForm);
-        function renderForm(ctx, next) {
-            console.log("test");
-            ctx.render('form');
-        }
-        function handleForm(ctx, next) {
-            var a = ctx.request.body;
-            let b = Object.values(a);
-            console.log(b);
-        }
-        app.use(router.routes());
-        app.listen(3000);
     }
 }
 exports.LoginController = LoginController;

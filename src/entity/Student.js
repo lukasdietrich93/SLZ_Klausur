@@ -34,7 +34,7 @@ __decorate([
     typeorm_1.Column({
         default: 0
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Student.prototype, "faculty_id", void 0);
 __decorate([
     typeorm_1.Column({

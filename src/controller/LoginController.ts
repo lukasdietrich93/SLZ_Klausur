@@ -4,40 +4,29 @@ import { Student } from "../entity/Student";
 import { Exam } from "../entity/Exam";
 import "reflect-metadata";
 import { Connection, createConnection } from "typeorm";
-import * as Koa from "koa";
 import * as Router from "koa-router";
-import * as _ from 'lodash';
-const bodyParser = require('koa-body');
-const app = new Koa();
-const router = new Router();
-/**
- * Make sure koa request knows the new "body" property.
- */
-declare module "koa" {
-    // tslint:disable-next-line:interface-name
-    interface Request {
-        body: any;
-    }
-}
-
 
 export class LoginController {
 
-
-    public async createLogin(mail: string, password: string, faculty: number) {
-        const connection: Connection = await ConnectionClass.getInstance();
-
-        let student = new Student();
-        //jetzt käme das ausgelesene Formular
-        student.mail = mail;
-        student.password = password;
-        student.active = false;
-        student.faculty_id = faculty;
-        //...weitere properties
-        let studentRepo = connection.getRepository(Student);
-        //persist?
-        await studentRepo.save(student);
+    public renderLogin(ctx: Router.IRouterContext, next: any) {
+        console.log("test");
+        ctx.render('form');
     }
+
+    public async createLogin(ctx: Router.IRouterContext, next: any) {
+        const connection: Connection = await ConnectionClass.getInstance();
+        let a = ctx.request.body;
+        let b = Object.values(a);
+        let student = new Student();
+        student.mail = b[0];
+        student.password = b[1],
+        student.faculty_id = b[2];
+        student.active = false;
+        let studentRepo = connection.getRepository(Student);
+        await studentRepo.save(student);
+        ctx.render('success');
+    }
+
     public async createExam(name: string, date: string, total_hours: number, spent_hours: number, status: Istatus) {
         const connection: Connection = await ConnectionClass.getInstance();
         let exam = new Exam();
@@ -50,40 +39,4 @@ export class LoginController {
         let examRepo = connection.getRepository(Exam);
         await examRepo.save(exam);
     }
-
-
-    public login() {
-        //Set up Pug
-        var Pug = require('koa-pug');
-        var pug = new Pug({
-            viewPath: '../src/views',
-            basedir: '../src/views',
-            app: app //Equivalent to app.use(pug)
-        });
-        pug.use(app);
-
-        //Set up body parsing middleware
-        app.use(bodyParser({
-            formidable: { uploadDir: '../src/views' },
-            multipart: true,
-            urlencoded: true
-        }));
-
-        router.get('/', renderForm);
-        router.post('/', handleForm);
-
-        function renderForm(ctx: Router.IRouterContext, next: any) {
-            console.log("test");
-            ctx.render('form');
-        }
-        function handleForm(ctx: Router.IRouterContext, next: any) {
-            var a = ctx.request.body;
-            let b = Object.values(a);
-            console.log(b);
-        }
-
-            app.use(router.routes());
-
-            app.listen(3000);
-        }
-    }
+}
