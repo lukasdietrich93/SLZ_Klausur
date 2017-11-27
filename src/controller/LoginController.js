@@ -39,6 +39,11 @@ var ConnectionClass_1 = require("../class/ConnectionClass");
 var Student_1 = require("../entity/Student");
 var Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
+var Koa = require("koa");
+var Router = require("koa-router");
+var bodyParser = require('koa-body');
+var app = new Koa();
+var router = new Router();
 var LoginController = /** @class */ (function () {
     function LoginController() {
     }
@@ -90,6 +95,33 @@ var LoginController = /** @class */ (function () {
                 }
             });
         });
+    };
+    LoginController.prototype.login = function () {
+        //Set up Pug
+        var Pug = require('koa-pug');
+        var pug = new Pug({
+            viewPath: '../views',
+            basedir: '../views',
+            app: app //Equivalent to app.use(pug)
+        });
+        pug.use(app);
+        //Set up body parsing middleware
+        app.use(bodyParser({
+            formidable: { uploadDir: '/views' },
+            multipart: true,
+            urlencoded: true
+        }));
+        router.get('/', renderForm);
+        router.post('/', handleForm);
+        function renderForm(ctx, next) {
+            console.log("test");
+            ctx.render('form');
+        }
+        function handleForm(ctx, next) {
+            console.log(ctx.request.body);
+        }
+        app.use(router.routes());
+        app.listen(3000);
     };
     return LoginController;
 }());

@@ -18,6 +18,9 @@
    },
    "homepage": "https://github.com/lukasdietrich93/SLZ_Klausur#readme",
    "dependencies": {
+      "@types/koa": "^2.0.41",
+      "@types/koa-pug": "^3.0.3",
+      "@types/koa-router": "^7.0.26",
       "@types/node": "^8.0.53",
       "koa": "^2.4.1",
       "koa-body": "^2.5.0",
