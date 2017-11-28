@@ -8,13 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const TipController_1 = require("./TipController");
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 const Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
 class LoginController {
     renderLogin(ctx, next) {
-        console.log("test");
         ctx.render('form');
     }
     createLogin(ctx, next) {
@@ -53,4 +53,6 @@ class LoginController {
     }
 }
 exports.LoginController = LoginController;
+let tip = new TipController_1.TipController;
+tip.getRandomTip();
 //# sourceMappingURL=LoginController.js.map

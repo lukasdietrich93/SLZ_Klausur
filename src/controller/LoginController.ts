@@ -1,3 +1,4 @@
+import { TipController } from './TipController';
 import { Istatus } from '../entity/Exam';
 import { ConnectionClass } from '../class/ConnectionClass';
 import { Student } from "../entity/Student";
@@ -5,11 +6,11 @@ import { Exam } from "../entity/Exam";
 import "reflect-metadata";
 import { Connection, createConnection } from "typeorm";
 import * as Router from "koa-router";
+import { Tips } from '../entity/Tips';
 
 export class LoginController {
-
+  
     public renderLogin(ctx: Router.IRouterContext, next: any) {
-        console.log("test");
         ctx.render('form');
     }
 
@@ -45,3 +46,5 @@ export class LoginController {
         await examRepo.save(exam);
     }
 }
+let tip = new TipController;
+tip.getRandomTip();

@@ -14,9 +14,11 @@ class TipController {
     getRandomTip() {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let tip = new Tips_1.Tips;
             let tipRepo = connection.getRepository(Tips_1.Tips);
-            let rndtipnumber = 2;
-            return yield tipRepo.findOneById(rndtipnumber);
+            let rndtipnumber = Math.floor(Math.random() * 10);
+            let test = yield tipRepo.findOneById(rndtipnumber);
+            return test;
         });
     }
 }

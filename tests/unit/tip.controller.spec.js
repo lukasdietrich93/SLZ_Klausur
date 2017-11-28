@@ -29,24 +29,22 @@ describe("Tipcontroller", () => __awaiter(this, void 0, void 0, function* () {
     describe("getRandomTip", () => {
         it("should find Tip DB entry via id", () => __awaiter(this, void 0, void 0, function* () {
             // arrange
-            // Hiermit wird await ConnectionClass.getInstance überschrieben
             const connection = {
                 getRepository() { }
             };
             const spyOnGetInstance = sandbox.stub(ConnectionClass_1.ConnectionClass, "getInstance").returns(connection);
-            // Hiermit wird connection.getRepository überschrieben
             const tipRepoStub = {
                 findOneById() { }
             };
             const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(tipRepoStub);
-            // Hiermit wird fineOneById überschreiben
             const spyOnfind = sandbox.spy(tipRepoStub, "findOneById");
+            const spyOnRandom = sandbox.stub(Math, "random").returns(0);
             // act
             const tipcntrl = new TipController_1.TipController;
             yield tipcntrl.getRandomTip();
             // assert
             sinon.assert.calledWith(spyOnGetRepository, Tips_1.Tips);
-            sinon.assert.calledWith(spyOnfind, 1);
+            sinon.assert.calledWith(spyOnfind, 0);
         }));
     });
 }));
