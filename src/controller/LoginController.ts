@@ -16,6 +16,7 @@ export class LoginController {
     public async createLogin(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         try{
+            let studentRepo = connection.getRepository(Student);
             let a = ctx.request.body;
             let b = Object.values(a);
             let student = new Student();
@@ -23,7 +24,6 @@ export class LoginController {
             student.password = b[1],
             student.faculty_id = b[2];
             student.active = false;
-            let studentRepo = connection.getRepository(Student);
             await studentRepo.save(student);
             ctx.render('success');
         }

@@ -4,7 +4,7 @@
    "description": "SLZ_Klausurvorbereitung",
    "main": "index.js",
    "scripts": {
-      "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./tests//unit/*.spec.ts",
+      "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./tests/unit/*.spec.ts",
       "start": "ts-node src/index.ts"
    },
    "repository": {
