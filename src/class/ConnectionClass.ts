@@ -4,10 +4,9 @@ import "reflect-metadata";
 
 export class ConnectionClass {
     public static _instance;
-    public static async getInstance(): Promise<Connection>{
-        if (!ConnectionClass._instance)
-        {
-            ConnectionClass._instance= await createConnection({
+    public static async getInstance(): Promise<Connection> {
+        if (!ConnectionClass._instance) {
+            ConnectionClass._instance = await createConnection({
                 type: "mysql",
                 host: "localhost",
                 port: 3306,
@@ -22,7 +21,7 @@ export class ConnectionClass {
             });
         }
         return ConnectionClass._instance;
-        }
+    }
 }
 
 

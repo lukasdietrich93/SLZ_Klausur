@@ -4,8 +4,8 @@
    "description": "SLZ_Klausurvorbereitung",
    "main": "index.js",
    "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./tests//unit/*.spec.ts",
-    "start": "ts-node src/index.ts"
+      "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./tests//unit/*.spec.ts",
+      "start": "ts-node src/index.ts"
    },
    "repository": {
       "type": "git",
@@ -22,16 +22,18 @@
       "@types/koa-pug": "^3.0.3",
       "@types/koa-router": "^7.0.26",
       "@types/node": "^8.0.53",
+      "@types/sinon": "^4.0.0",
       "koa": "^2.4.1",
       "koa-body": "^2.5.0",
-      "lodash": "4.17.4",
       "koa-pug": "^3.0.0-2",
       "koa-router": "^7.3.0",
+      "lodash": "4.17.4",
       "math": "0.0.3",
       "mysql": "^2.14.1",
       "nodemon": "^1.12.1",
       "pg": "^7.4.0",
       "reflect-metadata": "^0.1.10",
+      "sinon": "^4.1.2",
       "typeorm": "0.1.6",
       "typescript": "2.6.1"
    },
