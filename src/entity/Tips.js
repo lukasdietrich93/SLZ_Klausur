@@ -9,22 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var Tips = /** @class */ (function () {
-    function Tips() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], Tips.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Tips.prototype, "content", void 0);
-    Tips = __decorate([
-        typeorm_1.Entity()
-    ], Tips);
-    return Tips;
-}());
+const typeorm_1 = require("typeorm");
+let Tips = class Tips {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], Tips.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Tips.prototype, "content", void 0);
+Tips = __decorate([
+    typeorm_1.Entity()
+], Tips);
 exports.Tips = Tips;
 //# sourceMappingURL=Tips.js.map

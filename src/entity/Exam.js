@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
+const typeorm_1 = require("typeorm");
 var Istatus;
 (function (Istatus) {
     Istatus[Istatus["EXAM_DELETED"] = 0] = "EXAM_DELETED";
@@ -17,49 +17,46 @@ var Istatus;
     Istatus[Istatus["EXAM_WAITING"] = 2] = "EXAM_WAITING";
     Istatus[Istatus["EXAM_UPCOMING"] = 3] = "EXAM_UPCOMING";
 })(Istatus = exports.Istatus || (exports.Istatus = {}));
-var Exam = /** @class */ (function () {
-    function Exam() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], Exam.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Exam.prototype, "name", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Exam.prototype, "date", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Exam.prototype, "total_hours", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Exam.prototype, "spent_hours", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Exam.prototype, "status", void 0);
-    __decorate([
-        typeorm_1.Column({
-            default: false
-        }),
-        __metadata("design:type", Boolean)
-    ], Exam.prototype, "result_status", void 0);
-    __decorate([
-        typeorm_1.Column({
-            default: false
-        }),
-        __metadata("design:type", Boolean)
-    ], Exam.prototype, "reminder_status", void 0);
-    Exam = __decorate([
-        typeorm_1.Entity()
-    ], Exam);
-    return Exam;
-}());
+let Exam = class Exam {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], Exam.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Exam.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Exam.prototype, "date", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Exam.prototype, "total_hours", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Exam.prototype, "spent_hours", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Exam.prototype, "status", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: false
+    }),
+    __metadata("design:type", Boolean)
+], Exam.prototype, "result_status", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: false
+    }),
+    __metadata("design:type", Boolean)
+], Exam.prototype, "reminder_status", void 0);
+Exam = __decorate([
+    typeorm_1.Entity()
+], Exam);
 exports.Exam = Exam;
 //# sourceMappingURL=Exam.js.map

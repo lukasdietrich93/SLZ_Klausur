@@ -5,9 +5,44 @@ import {Exam} from "./entity/Exam";
 import {Tips} from "./entity/Tips";
 import { LoginController } from "./controller/LoginController"
 import { TipController } from "./controller/TipController"
+import * as Koa from "koa";
+import * as Router from "koa-router";
+import * as _ from 'lodash';
+const bodyParser = require('koa-body');
+const app = new Koa();
+const router = new Router();
 
-let Login = new LoginController();
-Login.createLogin("12345","testpwd",4444);
-Login.createExam("testexam","30/01/1999",500,250,3);
-let RndTip = new TipController();
-RndTip.getRandomTip();
+/**
+ * Make sure koa request knows the new "body" property.
+ */
+declare module "koa" {
+    // tslint:disable-next-line:interface-name
+    interface Request {
+        body: any;
+    }
+}
+
+
+var loginController = new LoginController;
+//Set up Pug
+var Pug = require('koa-pug');
+var pug = new Pug({
+    viewPath: '../src/views',
+    basedir: '../src/views',
+    app: app //Equivalent to app.use(pug)
+});
+pug.use(app);
+
+//Set up body parsing middleware
+app.use(bodyParser({
+    formidable: { uploadDir: '../src/views' },
+    multipart: true,
+    urlencoded: true
+}));
+
+router.get('/', loginController.renderLogin);
+router.post('/', loginController.createLogin);
+
+    app.use(router.routes());
+
+    app.listen(3000);

@@ -20,7 +20,7 @@ export class Student {
     @Column({
         default: 0
     })
-    faculty_id: number;
+    faculty_id: string;
 
     @Column({
         default: "01/01/1970"

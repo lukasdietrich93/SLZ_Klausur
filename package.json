@@ -24,6 +24,7 @@
       "@types/node": "^8.0.53",
       "koa": "^2.4.1",
       "koa-body": "^2.5.0",
+      "lodash": "4.17.4",
       "koa-pug": "^3.0.0-2",
       "koa-router": "^7.3.0",
       "math": "0.0.3",
@@ -35,8 +36,13 @@
       "typescript": "2.6.1"
    },
    "devDependencies": {
-      "ts-node": "3.3.0",
+      "@types/chai": "^4.0.5",
+      "@types/mocha": "^2.2.44",
       "@types/node": "^8.0.29",
-      "typescript": "2.5.2"
+      "chai": "^4.1.2",
+      "mochai": "^0.2.5",
+      "ts-node": "^3.3.0",
+      "typescript": "2.5.2",
+      "typings": "^2.1.1"
    }
 }
