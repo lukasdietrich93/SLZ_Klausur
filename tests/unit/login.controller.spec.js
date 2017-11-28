@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const TipController_1 = require("./../../de.uni-kl.disc.slz/SLZ_Klausur/src/controller/TipController");
 const Student_1 = require("./../../src/entity/Student");
 const ConnectionClass_1 = require("./../../src/class/ConnectionClass");
 const LoginController_1 = require("./../../src/controller/LoginController");
@@ -16,7 +15,6 @@ const sinon = require("sinon");
 require("reflect-metadata");
 const Koa = require("koa");
 const Router = require("koa-router");
-const Tips_1 = require("../../src/entity/Tips");
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
@@ -72,47 +70,6 @@ describe("LoginController", () => __awaiter(this, void 0, void 0, function* () {
         it("should call ctx.render()", () => {
             // ...
         });
-    });
-}));
-describe("Tipcontroller", () => __awaiter(this, void 0, void 0, function* () {
-    let sandbox;
-    beforeEach(() => {
-        sandbox = sinon.sandbox.create();
-    });
-    afterEach(() => {
-        sandbox.restore();
-    });
-    describe("getRandomTip", () => {
-        it("should find Tip DB entry via id", () => __awaiter(this, void 0, void 0, function* () {
-            // arrange
-            const connection = {
-                getRepository() { }
-            };
-            const spyOnGetInstance = sandbox.stub(ConnectionClass_1.ConnectionClass, "getInstance").returns(connection);
-            // Hiermit wird connection.getRepository überschrieben
-            const tipRepoStub = {
-                save() { }
-            };
-            const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(tipRepoStub);
-            // Hiermit wird 
-            const findAndCountStub = {
-                findAndCount() { }
-            };
-            const spyOnfindAndCount = sandbox.stub(findAndCountStub, "findAndCount");
-            // Hiermit wird
-            const findOneStub = {
-                findOneById() { }
-            };
-            const spyOnfind = sandbox.stub(findOneStub, "findOneById").returns(findOneStub);
-            // act
-            const tipcntrl = new TipController_1.TipController;
-            let tip = new Tips_1.Tips();
-            tip.content = yield tipcntrl.getRandomTip();
-            console.log(tip.content);
-            // assert
-            sinon.assert.calledWith(spyOnGetRepository, Tips_1.Tips);
-            sinon.assert.calledWith(spyOnfind, tip);
-        }));
     });
 }));
 //# sourceMappingURL=login.controller.spec.js.map

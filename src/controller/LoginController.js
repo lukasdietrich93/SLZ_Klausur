@@ -21,6 +21,7 @@ class LoginController {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             try {
+                let studentRepo = connection.getRepository(Student_1.Student);
                 let a = ctx.request.body;
                 let b = Object.values(a);
                 let student = new Student_1.Student();
@@ -28,7 +29,6 @@ class LoginController {
                 student.password = b[1],
                     student.faculty_id = b[2];
                 student.active = false;
-                let studentRepo = connection.getRepository(Student_1.Student);
                 yield studentRepo.save(student);
                 ctx.render('success');
             }

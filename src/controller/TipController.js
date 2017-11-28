@@ -15,12 +15,8 @@ class TipController {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let tipRepo = connection.getRepository(Tips_1.Tips);
-            let [allTips, allTipsNumber] = yield tipRepo.findAndCount();
-            var rndtipnumber = Math.floor(Math.random() * (allTipsNumber)) + 1;
-            let rndtip = yield tipRepo.findOneById(rndtipnumber);
-            //parse string into html tag
-            console.log(rndtip.content);
-            return rndtip.content;
+            let rndtipnumber = Math.random() * (10 - 1) + 1;
+            return (yield tipRepo.findOneById(rndtipnumber)).content;
         });
     }
 }
