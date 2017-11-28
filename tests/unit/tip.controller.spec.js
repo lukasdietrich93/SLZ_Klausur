@@ -8,13 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const TipController_1 = require("./../../de.uni-kl.disc.slz/SLZ_Klausur/src/controller/TipController");
 const ConnectionClass_1 = require("./../../src/class/ConnectionClass");
 const sinon = require("sinon");
 require("reflect-metadata");
 const Koa = require("koa");
 const Router = require("koa-router");
 const Tips_1 = require("../../src/entity/Tips");
+const TipController_1 = require("../../src/controller/TipController");
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
@@ -29,6 +29,7 @@ describe("Tipcontroller", () => __awaiter(this, void 0, void 0, function* () {
     describe("getRandomTip", () => {
         it("should find Tip DB entry via id", () => __awaiter(this, void 0, void 0, function* () {
             // arrange
+            // Hiermit wird await ConnectionClass.getInstance überschrieben
             const connection = {
                 getRepository() { }
             };
@@ -38,16 +39,14 @@ describe("Tipcontroller", () => __awaiter(this, void 0, void 0, function* () {
                 findOneById() { }
             };
             const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(tipRepoStub);
+            // Hiermit wird fineOneById überschreiben
             const spyOnfind = sandbox.spy(tipRepoStub, "findOneById");
             // act
             const tipcntrl = new TipController_1.TipController;
             yield tipcntrl.getRandomTip();
-            let tip = new Tips_1.Tips;
-            tip.id = 1;
-            tip.content = "hallo";
             // assert
             sinon.assert.calledWith(spyOnGetRepository, Tips_1.Tips);
-            sinon.assert.calledWith(spyOnfind, tip);
+            sinon.assert.calledWith(spyOnfind, 1);
         }));
     });
 }));

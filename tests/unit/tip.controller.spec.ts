@@ -1,4 +1,3 @@
-import { TipController } from './../../de.uni-kl.disc.slz/SLZ_Klausur/src/controller/TipController';
 import { ConnectionClass } from './../../src/class/ConnectionClass';
 import { LoginController } from './../../src/controller/LoginController';
 import { expect } from "chai";
@@ -9,6 +8,7 @@ import * as Koa from "koa";
 import * as Router from "koa-router";
 import * as _ from 'lodash';
 import { Tips } from '../../src/entity/Tips';
+import { TipController } from '../../src/controller/TipController';
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
@@ -39,13 +39,10 @@ describe("Tipcontroller", async() => {
                 findOneById() {}
             };
             const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(tipRepoStub);
-            
+
+           
             // Hiermit wird fineOneById überschreiben
             const spyOnfind = sandbox.spy(tipRepoStub, "findOneById");
-
-            let tip = new Tips;
-            tip.id = 1;
-            tip.content = "hallo";
 
             // act
             const tipcntrl = new TipController;
@@ -54,7 +51,7 @@ describe("Tipcontroller", async() => {
 
             // assert
             sinon.assert.calledWith(spyOnGetRepository, Tips);
-            sinon.assert.calledWith(spyOnfind, tip);
+            sinon.assert.calledWith(spyOnfind, 1);
         })
     })
 })
