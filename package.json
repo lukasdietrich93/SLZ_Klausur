@@ -4,8 +4,8 @@
    "description": "SLZ_Klausurvorbereitung",
    "main": "index.js",
    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "ts-node src/index.ts"
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./tests//unit/*.spec.ts",
+    "start": "ts-node src/index.ts"
    },
    "repository": {
       "type": "git",
