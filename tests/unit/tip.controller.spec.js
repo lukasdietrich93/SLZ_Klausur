@@ -42,9 +42,12 @@ describe("Tipcontroller", () => __awaiter(this, void 0, void 0, function* () {
             // act
             const tipcntrl = new TipController_1.TipController;
             yield tipcntrl.getRandomTip();
+            let tip = new Tips_1.Tips;
+            tip.id = 1;
+            tip.content = "hallo";
             // assert
             sinon.assert.calledWith(spyOnGetRepository, Tips_1.Tips);
-            sinon.assert.calledWith(spyOnfind, 1);
+            sinon.assert.calledWith(spyOnfind, tip);
         }));
     });
 }));

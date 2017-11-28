@@ -28,6 +28,7 @@ describe("Tipcontroller", async() => {
         it("should find Tip DB entry via id", async ()=> {
 
             // arrange
+            // Hiermit wird await ConnectionClass.getInstance überschrieben
             const connection = {
                 getRepository() {}
             };
@@ -39,16 +40,21 @@ describe("Tipcontroller", async() => {
             };
             const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(tipRepoStub);
             
+            // Hiermit wird fineOneById überschreiben
+            const spyOnfind = sandbox.spy(tipRepoStub, "findOneById");
 
-            const spyOnfind = sandbox.spy(tipRepoStub, "findOneById")
-            
+            let tip = new Tips;
+            tip.id = 1;
+            tip.content = "hallo";
+
             // act
             const tipcntrl = new TipController;
             await tipcntrl.getRandomTip();
 
+
             // assert
             sinon.assert.calledWith(spyOnGetRepository, Tips);
-            sinon.assert.calledWith(spyOnfind, 1);
+            sinon.assert.calledWith(spyOnfind, tip);
         })
     })
 })
