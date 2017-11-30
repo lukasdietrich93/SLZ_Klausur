@@ -8,11 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-<<<<<<< HEAD
 const MailController_1 = require("./MailController");
-=======
-const TipController_1 = require("./TipController");
->>>>>>> 0e4c804ea99ee530271b69c0615ef5564764ae89
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 const Exam_1 = require("../entity/Exam");
@@ -70,6 +66,4 @@ class LoginController {
     }
 }
 exports.LoginController = LoginController;
-let tip = new TipController_1.TipController;
-tip.getRandomTip();
 //# sourceMappingURL=LoginController.js.map

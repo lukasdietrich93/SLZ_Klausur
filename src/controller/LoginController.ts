@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { MailController } from './MailController';
-=======
-import { TipController } from './TipController';
->>>>>>> 0e4c804ea99ee530271b69c0615ef5564764ae89
 import { Istatus } from '../entity/Exam';
 import { ConnectionClass } from '../class/ConnectionClass';
 import { Student } from "../entity/Student";
@@ -10,16 +6,12 @@ import { Exam } from "../entity/Exam";
 import "reflect-metadata";
 import { Connection, createConnection } from "typeorm";
 import * as Router from "koa-router";
-<<<<<<< HEAD
 import { Email } from 'sendmail';
 import { MailServer } from '../class/MailServerClass';
 import { HashNo } from '../entity/HashNo';
 import { HashNoController } from './HashController';
 import { Repository } from 'typeorm/repository/Repository';
  
-=======
-import { Tips } from '../entity/Tips';
->>>>>>> 0e4c804ea99ee530271b69c0615ef5564764ae89
 
 export class LoginController {
   
@@ -70,5 +62,3 @@ export class LoginController {
     
   
 }
-let tip = new TipController;
-tip.getRandomTip();
