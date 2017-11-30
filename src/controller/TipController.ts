@@ -5,8 +5,10 @@ import { ConnectionClass } from '../class/ConnectionClass';
 export class TipController{
     public async getRandomTip(){
         const connection: Connection = await ConnectionClass.getInstance();
+        let tip = new Tips;
         let tipRepo = connection.getRepository(Tips);
-        let rndtipnumber = 1;
-        return await tipRepo.findOneById(rndtipnumber);
+        let rndtipnumber = Math.floor(Math.random() * 10);
+        let test = await tipRepo.findOneById(rndtipnumber);
+        return test
     }
 }
