@@ -47,7 +47,7 @@ describe("LoginController", () => __awaiter(this, void 0, void 0, function* () {
             const ctx = {
                 request: {
                     body: {
-                        mail: "info@netnexus.de",
+                        mail: "lukasdietrich@netnexus.de",
                         password: "123",
                         faculty_id: "1",
                     }
@@ -56,7 +56,7 @@ describe("LoginController", () => __awaiter(this, void 0, void 0, function* () {
             };
             // Diesen Student nutzen wir später in der assertion
             let student = new Student_1.Student();
-            student.mail = "info@netnexus.de";
+            student.mail = "lukasdietrich@netnexus.de";
             student.password = "123",
                 student.faculty_id = "1";
             student.active = false;

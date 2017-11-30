@@ -8,13 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const MailController_1 = require("./MailController");
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 const Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
+const HashNo_1 = require("../entity/HashNo");
+const HashController_1 = require("./HashController");
 class LoginController {
     renderLogin(ctx, next) {
-        console.log("test");
         ctx.render('form');
     }
     createLogin(ctx, next) {
@@ -22,14 +24,25 @@ class LoginController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             try {
                 let studentRepo = connection.getRepository(Student_1.Student);
+                let hashRepo = connection.getRepository(HashNo_1.HashNo);
                 let a = ctx.request.body;
                 let b = Object.values(a);
                 let student = new Student_1.Student();
+                let hashcontroller = new HashController_1.HashNoController;
                 student.mail = b[0];
                 student.password = b[1],
                     student.faculty_id = b[2];
                 student.active = false;
-                yield studentRepo.save(student);
+                let actualhash = hashcontroller.saveAndReturnHash();
+                student.hash = yield actualhash;
+                let mailcontr = new MailController_1.MailController;
+                let persist = mailcontr.sendRegLink(student.mail, student.hash);
+                console.log(yield persist);
+                if ((yield persist) == 1) {
+                    yield studentRepo.save(student);
+                }
+                let activate = new HashController_1.HashNoController;
+                // activate.activateAccount(student.mail, student.hash);
                 ctx.render('success');
             }
             catch (e) {

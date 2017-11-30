@@ -31,5 +31,8 @@ export class Student {
         default: "01/01/1970"
     })
     register_date: String;
+    
+    @Column()
+    hash: string;
 
 }

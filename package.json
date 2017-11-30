@@ -23,6 +23,7 @@
       "@types/koa-router": "^7.0.26",
       "@types/node": "^8.0.53",
       "@types/sinon": "^4.0.0",
+      "email": "0.2.6",
       "koa": "^2.4.1",
       "koa-body": "^2.5.0",
       "koa-pug": "^3.0.0-2",
@@ -33,6 +34,7 @@
       "nodemon": "^1.12.1",
       "pg": "^7.4.0",
       "reflect-metadata": "^0.1.10",
+      "sendmail": "1.2.0",
       "sinon": "^4.1.2",
       "typeorm": "0.1.6",
       "typescript": "2.6.1"

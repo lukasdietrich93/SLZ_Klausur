@@ -2,4 +2,13 @@ html
    head
       title Form Tester
    body
-      p success
+      form(action = "/", method = "POST")
+         div
+            label(for = "mail") E-Mail: 
+            input(name = "mail" value = "")
+         br
+         div
+            label(for = "Code") Code: 
+            input(name = "Code" value = "")
+         br
+         button(type = "Konto aktivieren") Konto aktivieren
