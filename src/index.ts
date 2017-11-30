@@ -1,3 +1,4 @@
+import { HashNoController } from './controller/HashController';
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Student} from "./entity/Student";
@@ -24,6 +25,7 @@ declare module "koa" {
 
 
 var loginController = new LoginController;
+var hashController = new HashNoController;
 //Set up Pug
 var Pug = require('koa-pug');
 var pug = new Pug({
@@ -42,6 +44,7 @@ app.use(bodyParser({
 
 router.get('/', loginController.renderLogin);
 router.post('/', loginController.createLogin);
+router.post('/activate', loginController.activateAccount);
 
     app.use(router.routes());
 

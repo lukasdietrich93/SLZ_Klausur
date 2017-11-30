@@ -33,17 +33,17 @@ class LoginController {
                 student.password = b[1],
                     student.faculty_id = b[2];
                 student.active = false;
-                let actualhash = hashcontroller.saveAndReturnHash();
-                student.hash = yield actualhash;
+                student.hash = Math.random().toString(36).substring(7);
                 let mailcontr = new MailController_1.MailController;
                 let persist = mailcontr.sendRegLink(student.mail, student.hash);
                 console.log(yield persist);
                 if ((yield persist) == 1) {
                     yield studentRepo.save(student);
+                    ctx.render('success');
                 }
-                let activate = new HashController_1.HashNoController;
-                // activate.activateAccount(student.mail, student.hash);
-                ctx.render('success');
+                else {
+                    ctx.render('alreadyexisting');
+                }
             }
             catch (e) {
                 ctx.render('failed');
@@ -62,6 +62,17 @@ class LoginController {
             exam.status = status;
             let examRepo = connection.getRepository(Exam_1.Exam);
             yield examRepo.save(exam);
+        });
+    }
+    activateAccount(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mail = ctx.request.body.mail;
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let studentRepo = connection.getRepository(Student_1.Student);
+            const student = yield studentRepo.findOne({ mail: mail });
+            student.active = true;
+            console.log("hallo");
+            yield studentRepo.save(student);
         });
     }
 }

@@ -1,3 +1,4 @@
+import { HashNoController } from './../../src/controller/HashController';
 import { Student } from './../../src/entity/Student';
 import { ConnectionClass } from './../../src/class/ConnectionClass';
 import { LoginController } from './../../src/controller/LoginController';
@@ -43,9 +44,14 @@ describe("LoginController", async () => {
                 save() {}
             };
             const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(studenRepoStub);
+            const actualhash = {
+                saveAndReturnHash() {}
+            };
+     //       const spyOnRandom = sandbox.stub(HashNoController, "saveAndReturnHash").returns(actualhash);
             
             // Hiermit wird studentRepo.save überschrieben
             const spyOnSave = sandbox.spy(studenRepoStub, "save");
+
             
             // ein Hilfscontext, da wir keinen richtigen ctx haben
             const ctx = {

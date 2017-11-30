@@ -32,15 +32,17 @@ export class LoginController {
             student.password = b[1],
             student.faculty_id = b[2];
             student.active = false;
-            let actualhash = hashcontroller.saveAndReturnHash();
-            student.hash = await actualhash;
+            student.hash = Math.random().toString(36).substring(7);
             let mailcontr = new MailController;
             let persist = mailcontr.sendRegLink(student.mail, student.hash);
             console.log(await persist);
-            if (await persist == 1){ await studentRepo.save(student);}
-            let activate = new HashNoController
-           // activate.activateAccount(student.mail, student.hash);
-            ctx.render('success');
+            if (await persist == 1){ 
+                await studentRepo.save(student);
+                ctx.render('success');
+            }
+            else{
+                ctx.render('alreadyexisting');
+            }
         }
         catch(e){
             ctx.render('failed');
@@ -59,6 +61,13 @@ export class LoginController {
         let examRepo = connection.getRepository(Exam);
         await examRepo.save(exam);
     }
-    
-  
+    public async activateAccount(ctx: Router.IRouterContext, next: any){
+        const mail = ctx.request.body.mail;
+        const connection: Connection = await ConnectionClass.getInstance();
+        let studentRepo = connection.getRepository(Student);
+        const student = await studentRepo.findOne({ mail: mail});
+        student.active = true;
+        console.log("hallo");
+        await studentRepo.save(student);
+        }
 }

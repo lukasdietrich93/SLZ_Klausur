@@ -41,6 +41,10 @@ describe("LoginController", () => __awaiter(this, void 0, void 0, function* () {
                 save() { }
             };
             const spyOnGetRepository = sandbox.stub(connection, "getRepository").returns(studenRepoStub);
+            const actualhash = {
+                saveAndReturnHash() { }
+            };
+            //       const spyOnRandom = sandbox.stub(HashNoController, "saveAndReturnHash").returns(actualhash);
             // Hiermit wird studentRepo.save überschrieben
             const spyOnSave = sandbox.spy(studenRepoStub, "save");
             // ein Hilfscontext, da wir keinen richtigen ctx haben
