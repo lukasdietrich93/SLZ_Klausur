@@ -34,26 +34,7 @@ export class ExamController {
         var examcontroller = new ExamController;
         var exams = examcontroller.findExams();
         var str =  JSON.stringify( await exams);
-        str = str.replace(/"/g, "");
-        str = str.replace(/:/g, ": ");
-        str = str.replace(/\[{/g,"");
-        str = str.replace(/\,{/g,"");
-        str = str.replace(/\]/g,"");
-        str = str.replace(/,/g, ", ");
-        str = str.replace(/result_status: false/g, "");
-        str = str.replace(/result_status: true/g, "");
-        str = str.replace(/reminder_status: false/g,"");
-        str = str.replace(/reminder_status: true/g, "");
-        str = str.replace(/total_hours:/g, "");
-        str = str.replace(/spent_hours:/g, "");
-        str = str.replace(/date:/g, "");
-        str = str.replace(/name:/g, "");
-        str = str.replace(/id:/g, "");
-        str = str.replace(/status:/g, "");
-        str = str.replace(/status:/g, "");
-        str = str.replace(/status:/g, "");
-        str = str.replace(/status:/g, "");
-        await ctx.render('overview',{exams: str});
+        await ctx.render('overview',{exams: await exams});
     }
     public async findExams(): Promise<Exam[]>{
         const connection: Connection = await ConnectionClass.getInstance();

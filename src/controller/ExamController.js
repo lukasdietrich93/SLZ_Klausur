@@ -32,26 +32,7 @@ class ExamController {
             var examcontroller = new ExamController;
             var exams = examcontroller.findExams();
             var str = JSON.stringify(yield exams);
-            str = str.replace(/"/g, "");
-            str = str.replace(/:/g, ": ");
-            str = str.replace(/\[{/g, "");
-            str = str.replace(/\,{/g, "");
-            str = str.replace(/\]/g, "");
-            str = str.replace(/,/g, ", ");
-            str = str.replace(/result_status: false/g, "");
-            str = str.replace(/result_status: true/g, "");
-            str = str.replace(/reminder_status: false/g, "");
-            str = str.replace(/reminder_status: true/g, "");
-            str = str.replace(/total_hours:/g, "");
-            str = str.replace(/spent_hours:/g, "");
-            str = str.replace(/date:/g, "");
-            str = str.replace(/name:/g, "");
-            str = str.replace(/id:/g, "");
-            str = str.replace(/status:/g, "");
-            str = str.replace(/status:/g, "");
-            str = str.replace(/status:/g, "");
-            str = str.replace(/status:/g, "");
-            yield ctx.render('overview', { exams: str });
+            yield ctx.render('overview', { exams: yield exams });
         });
     }
     findExams() {
