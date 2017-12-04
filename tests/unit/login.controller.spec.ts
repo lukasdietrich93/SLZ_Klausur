@@ -1,4 +1,3 @@
-import { HashNoController } from './../../src/controller/HashController';
 import { Student } from './../../src/entity/Student';
 import { ConnectionClass } from './../../src/class/ConnectionClass';
 import { LoginController } from './../../src/controller/LoginController';

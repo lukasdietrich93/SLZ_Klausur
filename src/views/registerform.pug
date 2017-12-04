@@ -1,0 +1,34 @@
+html
+   head
+      title Klausurplaner Startseite
+   body
+      p Kontodaten eingeben zum einloggen
+      form(action = "/login", method = "POST")
+         div
+            label(for = "mail") E-Mail: 
+            input(name = "mail2" value = "")
+         br
+         div
+            label(for = "password") Passwort: 
+            input(name = "password2" value = "")
+         br
+         button(type = "submit") Login
+      p Sie haben noch kein Konto? Hier können Sie sich registrieren
+      form(action = "/register", method = "POST")
+         div
+            label(for = "mail") E-Mail: 
+            input(name = "mail" value = "")
+         br
+         div
+            label(for = "password") Passwort: 
+            input(name = "password" value = "")
+         br
+         div
+            label(for = "faculty") Studiengang: 
+            input(name = "faculty" value = "")
+         br
+         button(type = "submit") Registrieren
+         
+         br
+
+         

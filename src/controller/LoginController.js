@@ -11,24 +11,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const MailController_1 = require("./MailController");
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
-const Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
-const HashNo_1 = require("../entity/HashNo");
-const HashController_1 = require("./HashController");
 class LoginController {
     renderLogin(ctx, next) {
-        ctx.render('form');
+        ctx.render('registerform');
     }
     createLogin(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             try {
                 let studentRepo = connection.getRepository(Student_1.Student);
-                let hashRepo = connection.getRepository(HashNo_1.HashNo);
                 let a = ctx.request.body;
                 let b = Object.values(a);
                 let student = new Student_1.Student();
-                let hashcontroller = new HashController_1.HashNoController;
                 student.mail = b[0];
                 student.password = b[1],
                     student.faculty_id = b[2];
@@ -36,7 +31,6 @@ class LoginController {
                 student.hash = Math.random().toString(36).substring(7);
                 let mailcontr = new MailController_1.MailController;
                 let persist = mailcontr.sendRegLink(student.mail, student.hash);
-                console.log(yield persist);
                 if ((yield persist) == 1) {
                     yield studentRepo.save(student);
                     ctx.render('success');
@@ -50,29 +44,41 @@ class LoginController {
             }
         });
     }
-    createExam(name, date, total_hours, spent_hours, status) {
+    Login(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
-            let exam = new Exam_1.Exam();
-            //jetzt käme das ausgelesene Formular
-            exam.name = name;
-            exam.date = date;
-            exam.total_hours = total_hours;
-            exam.spent_hours = spent_hours;
-            exam.status = status;
-            let examRepo = connection.getRepository(Exam_1.Exam);
-            yield examRepo.save(exam);
+            let studentRepo = connection.getRepository(Student_1.Student);
+            const mail = ctx.request.body.mail2;
+            const student = yield studentRepo.findOne({ mail: mail });
+            if (ctx.request.body.mail2 == student.mail) {
+                if (ctx.request.body.password2 == student.password) {
+                    ctx.render('loginsuccess');
+                    return;
+                }
+                else {
+                    ctx.render('loginfailed');
+                }
+            }
         });
     }
     activateAccount(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const mail = ctx.request.body.mail;
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let studentRepo = connection.getRepository(Student_1.Student);
+            const mail = ctx.request.body.mail;
             const student = yield studentRepo.findOne({ mail: mail });
-            student.active = true;
-            console.log("hallo");
-            yield studentRepo.save(student);
+            if (student.active == true) {
+                ctx.render('alreadyactivated');
+                return;
+            }
+            if (ctx.request.body.Code == student.hash) {
+                student.active = true;
+                yield studentRepo.save(student);
+                ctx.render('registrationsuccess');
+            }
+            else {
+                ctx.render('failed');
+            }
         });
     }
 }

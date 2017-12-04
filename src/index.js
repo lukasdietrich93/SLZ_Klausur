@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const HashController_1 = require("./controller/HashController");
 require("reflect-metadata");
 const LoginController_1 = require("./controller/LoginController");
 const Koa = require("koa");
 const Router = require("koa-router");
+const ExamController_1 = require("./controller/ExamController");
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
 var loginController = new LoginController_1.LoginController;
-var hashController = new HashController_1.HashNoController;
+var examController = new ExamController_1.ExamController;
 //Set up Pug
 var Pug = require('koa-pug');
 var pug = new Pug({
@@ -25,8 +25,11 @@ app.use(bodyParser({
     urlencoded: true
 }));
 router.get('/', loginController.renderLogin);
-router.post('/', loginController.createLogin);
+router.get('/addpage', examController.renderExam);
+router.post('/register', loginController.createLogin);
+router.post('/login', loginController.Login);
 router.post('/activate', loginController.activateAccount);
+router.post('/overview', examController.createExam);
 app.use(router.routes());
 app.listen(3000);
 //# sourceMappingURL=index.js.map

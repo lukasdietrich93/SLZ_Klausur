@@ -1,4 +1,3 @@
-import { HashNoController } from './HashController';
 import { Email } from 'sendmail';
 import { MailServer } from './../class/MailServerClass';
 import { Istatus } from '../entity/Exam';

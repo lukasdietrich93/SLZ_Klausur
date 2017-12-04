@@ -1,0 +1,23 @@
+table{
+    table-layout:fixed;
+    border-collapse: collapse;
+    width:100%;
+    border: 1px solid black;
+}
+thead{
+    word-spacing:40px;
+    text-align: left;
+    padding:25px;
+    font-size:1.2em;
+}
+tr{
+    padding:15px;
+    border: 1px solid black;
+}
+td{
+    border: 1px solid black;
+    padding:15px;
+    word-spacing: 50px;
+    text-align: left;
+    vertical-align: bottom;   
+}

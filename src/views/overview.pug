@@ -1,0 +1,67 @@
+html
+   head
+      title Form Tester
+      style
+        include style.css
+   body
+      p Übersicht ihrer Klausuren:
+      table    
+        th id
+        th name
+        th Datum
+        th zeit
+        th zeit2
+        th Erinnerungsstatus
+          for object in [exams]
+              -var str = object.split(", }")
+              tr
+              -var string = str[0].split(",")
+                td= string[0]
+                td= string[1]
+                td= string[2]
+                td= string[3]
+                td= string[4]
+                td= string[5]
+              tr
+              -string = str[1].split(",")
+                td= string[0]
+                td= string[1]
+                td= string[2]
+                td= string[3]
+                td= string[4]
+                td= string[5]
+              tr  
+              -string = str[2].split(",")
+                td= string[0]
+                td= string[1]
+                td= string[2]
+                td= string[3]
+                td= string[4]
+                td= string[5]
+              tr  
+              -string = str[3].split(",")
+                td= string[0]
+                td= string[1]
+                td= string[2]
+                td= string[3]
+                td= string[4]
+                td= string[5]
+              tr  
+              -string = str[4].split(",")
+                td= string[0]
+                td= string[1]
+                td= string[2]
+                td= string[3]
+                td= string[4]
+                td= string[5]
+              tr  
+              -string = str[5].split(",")
+                td= string[0]
+                td= string[1]
+                td= string[2]
+                td= string[3]
+                td= string[4]
+                td= string[5]
+
+
+

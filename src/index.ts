@@ -1,4 +1,3 @@
-import { HashNoController } from './controller/HashController';
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Student} from "./entity/Student";
@@ -9,6 +8,7 @@ import { TipController } from "./controller/TipController"
 import * as Koa from "koa";
 import * as Router from "koa-router";
 import * as _ from 'lodash';
+import { ExamController } from "./controller/ExamController";
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
@@ -25,7 +25,7 @@ declare module "koa" {
 
 
 var loginController = new LoginController;
-var hashController = new HashNoController;
+var examController = new ExamController;
 //Set up Pug
 var Pug = require('koa-pug');
 var pug = new Pug({
@@ -43,8 +43,11 @@ app.use(bodyParser({
 }));
 
 router.get('/', loginController.renderLogin);
-router.post('/', loginController.createLogin);
+router.get('/addpage', examController.renderExam);
+router.post('/register', loginController.createLogin);
+router.post('/login', loginController.Login);
 router.post('/activate', loginController.activateAccount);
+router.post('/overview', examController.createExam);
 
     app.use(router.routes());
 

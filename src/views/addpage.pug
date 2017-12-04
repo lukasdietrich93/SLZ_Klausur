@@ -1,0 +1,31 @@
+html
+   head
+      title Klausurplaner Startseite
+   body
+      p Kontodaten eingeben zum einloggen
+      form(action = "/overview", method = "POST")
+         div
+            label(for = "name") Name: 
+            input(name = "name" value = "")
+         br
+         div
+            label(for = "date") Datum: 
+            input(name = "date" value = "")
+         br
+         div
+            label(for = "total_hours") geplanter Zeitaufwand: 
+            input(name = "total_hours" value = "")
+         br
+         div
+            label(for = "spent_hours") erbrachter Zeitaufwand: 
+            input(name = "spent_hours" value = "")
+         br
+         div
+            label(for = "status") Status: 
+            input(name = "status" value = "")
+         br
+         button(type = "submit") Klausur erstellen
+      
+      
+
+         
