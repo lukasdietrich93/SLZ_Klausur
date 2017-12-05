@@ -45,6 +45,7 @@ app.use(bodyParser({
 router.get('/', loginController.renderLogin);
 router.get('/exam/:id', examController.showDetail);
 router.get('/addpage', examController.renderExam);
+router.get('/overview', examController.renderOverview);
 router.post('/register', loginController.createLogin);
 router.post('/login', loginController.Login);
 router.post('/activate', loginController.activateAccount);

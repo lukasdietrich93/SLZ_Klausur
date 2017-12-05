@@ -15,6 +15,13 @@ class ExamController {
     renderExam(ctx, next) {
         ctx.render('addpage');
     }
+    renderOverview(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var examcontroller = new ExamController;
+            var exams = examcontroller.findExams();
+            ctx.render('overview', { exams: yield exams });
+        });
+    }
     createExam(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();

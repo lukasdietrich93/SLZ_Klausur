@@ -19,6 +19,11 @@ export class ExamController {
     public renderExam(ctx: Router.IRouterContext, next: any) {
         ctx.render('addpage');
     }
+    public async renderOverview(ctx: Router.IRouterContext, next: any) {
+        var examcontroller = new ExamController;
+        var exams = examcontroller.findExams();
+        ctx.render('overview',{exams: await exams});
+    }
     public async createExam(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         let exam = new Exam();
