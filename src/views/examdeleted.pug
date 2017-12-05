@@ -22,6 +22,9 @@ html
                 td(class=data ? 'data' : 'data')= object.status
                 td
                   a(class='edit' href='/exam/'+object.id) Editieren
+                  form(action = "/examdeleted", method = "POST") 
+                    button(class='edit' type = "submit") Löschen
+
         p
           a(class='edit' href='/addpage') Weitere hinzufügen
           a(class='logout' href='/') Logout
