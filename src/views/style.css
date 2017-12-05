@@ -23,3 +23,40 @@ button {
     width:140px;
     height: 50px;
 }
+.logout {
+    background-color: rgb(60, 62, 175); 
+    position: fixed;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    top: 10px;
+    right: 10px;
+    }
+.styled {
+    background-color: rgb(60, 62, 175); 
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    float: left;
+}
+.edit {
+    background-color: rgb(189, 75, 75); 
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding:10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    float: left;
+}
+p{
+    font-size: 1.2em;
+}

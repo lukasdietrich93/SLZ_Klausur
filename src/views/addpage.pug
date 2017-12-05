@@ -1,6 +1,8 @@
 html
    head
       title Klausurplaner Startseite
+      style
+        include style.css
    body
       p Kontodaten eingeben zum einloggen
       form(action = "/overview", method = "POST")
@@ -24,7 +26,7 @@ html
             label(for = "status") Status: 
             input(name = "status" value = "")
          br
-         button(type = "submit") Klausur erstellen
+         button(class='styled' type = "submit") Klausur erstellen
       
       
 

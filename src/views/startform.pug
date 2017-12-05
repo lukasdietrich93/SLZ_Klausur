@@ -1,6 +1,8 @@
 html
    head
       title Form Tester
+      style
+        include style.css
    body
       form(action = "/", method = "POST")
          div
@@ -13,4 +15,4 @@ html
          br
          div
          br
-         button(type = "submit") Senden
+         button(class='styled' type = "submit") Senden

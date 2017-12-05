@@ -1,11 +1,9 @@
 html
    head
       title Form Tester
+      style
+        include style.css
    body
-      p Übersicht ihrer Klausuren:
-      li
-         ol
-         ol
-         ol
-               form(action = "/addpage", method = "GET")
-                  button(type = "submit") Klausur hinzufügen
+      p Login erfolgreich
+        form(action = "/addpage", method = "GET")
+          button(class='styled' type = "submit") Klausur hinzufügen

@@ -21,7 +21,8 @@ html
                 td(class=data ? 'data' : 'data')= object.spent_hours
                 td(class=data ? 'data' : 'data')= object.reminder_status
                 td
-                  a(href='/exam/'+object.id) Editieren
+                  a(class='edit' href='/exam/'+object.id) Editieren
         p
-          a(href='/addpage') Weitere hinzufügen
+          a(class='edit' href='/addpage') Weitere hinzufügen
+          a(class='logout' href='/') Logout
 

@@ -1,6 +1,8 @@
 html
    head
       title Klausurplaner Startseite
+      style
+        include style.css
    body
       p Kontodaten eingeben zum einloggen
       form(action = "/login", method = "POST")
@@ -12,7 +14,13 @@ html
             label(for = "password") Passwort: 
             input(name = "password2" value = "")
          br
-         button(type = "submit") Login
+         button(class='styled' type = "submit") Login
+         br
+
+         br
+         br
+         br
+         br
       p Sie haben noch kein Konto? Hier können Sie sich registrieren
       form(action = "/register", method = "POST")
          div
@@ -27,7 +35,7 @@ html
             label(for = "faculty") Studiengang: 
             input(name = "faculty" value = "")
          br
-         button(type = "submit") Registrieren
+         button(class='styled' type = "submit") Registrieren
          
          br
 

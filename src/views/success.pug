@@ -1,6 +1,8 @@
 html
    head
       title Form Tester
+      style
+        include style.css
    body
       form(action = "/activate", method = "POST")
          div
@@ -11,4 +13,4 @@ html
             label(for = "Code") Code: 
             input(name = "Code" value = "")
          br
-         button(type = "Konto aktivieren") Konto aktivieren
+         button(class='styled' type = "Konto aktivieren") Konto aktivieren

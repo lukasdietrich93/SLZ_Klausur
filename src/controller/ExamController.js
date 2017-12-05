@@ -60,6 +60,10 @@ class ExamController {
             name = name.replace("http://localhost:3000/exam/", "");
             let currentExam = yield editRepo.findOneById({ id: name });
             currentExam.name = ctx.request.body.name;
+            currentExam.date = ctx.request.body.date;
+            currentExam.total_hours = ctx.request.body.total_hours;
+            currentExam.spent_hours = ctx.request.body.spent_hours;
+            currentExam.reminder_status = ctx.request.body.reminder_status;
             yield editRepo.save(currentExam);
             var examcontroller = new ExamController;
             var exams = examcontroller.findExams();

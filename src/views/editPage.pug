@@ -1,6 +1,8 @@
 html
    head
       title Klausurplaner Startseite
+      style
+        include style.css
    body
       p Kontodaten eingeben zum einloggen
       form(action = "/examedited", method = "POST")
@@ -24,7 +26,8 @@ html
             label(for = "status") Status: 
             input(name = "status" value = exam.status)
          br
-         button(type = "submit") Klausur editieren
+         button(class='styled' type = "submit") Klausur editieren
+      a(class='logout' href='/') Logout   
       
       
 
