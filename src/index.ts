@@ -43,12 +43,13 @@ app.use(bodyParser({
 }));
 
 router.get('/', loginController.renderLogin);
+router.get('/exam/:id', examController.showDetail);
 router.get('/addpage', examController.renderExam);
 router.post('/register', loginController.createLogin);
 router.post('/login', loginController.Login);
 router.post('/activate', loginController.activateAccount);
 router.post('/overview', examController.createExam);
-
+router.post('/examedited', examController.editExam);
     app.use(router.routes());
 
     app.listen(3000);

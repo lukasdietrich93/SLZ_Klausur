@@ -10,6 +10,7 @@ import { Email } from 'sendmail';
 import { MailServer } from '../class/MailServerClass';
 import { Repository } from 'typeorm/repository/Repository';
 import { SSL_OP_NETSCAPE_CHALLENGE_BUG } from 'constants';
+import { Archive } from '../entity/Archive';
 
 
 export class ExamController {
@@ -41,5 +42,28 @@ export class ExamController {
         let allExamsRepo = connection.getRepository(Exam);
         let allExams = await allExamsRepo.find();
         return await allExams;
+    }
+
+    public async showDetail(ctx: Router.IRouterContext, next: any){
+        let id = Object.values(ctx.params)[0];
+        const connection: Connection = await ConnectionClass.getInstance();
+        let editRepo = connection.getRepository(Exam);
+        let editExam = await editRepo.findOneById(id);
+        await ctx.render('editpage',{exam: await editExam});
+    }
+    public async editExam(ctx: Router.IRouterContext, next: any) {
+        const connection: Connection = await ConnectionClass.getInstance();
+        let editRepo = connection.getRepository(Exam);
+        let name = ctx.request.header.referer;
+        name = name.replace("http://localhost:3000/exam/","");
+        let currentExam =await editRepo.findOneById({id : name});
+        currentExam.name = ctx.request.body.name;
+        await editRepo.save(currentExam);
+        var examcontroller = new ExamController;
+        var exams = examcontroller.findExams();
+        var str =  JSON.stringify( await exams);
+        await ctx.render('overview',{exams: await exams});
+        ctx.render('examedited',{exams: await exams});
+        
     }
 }

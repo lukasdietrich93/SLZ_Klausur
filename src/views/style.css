@@ -1,23 +1,25 @@
 table{
-    table-layout:fixed;
+    table-layout:auto;
     border-collapse: collapse;
-    width:100%;
-    border: 1px solid black;
+    width:95%;
 }
-thead{
-    word-spacing:40px;
-    text-align: left;
+th{
     padding:25px;
-    font-size:1.2em;
+    width:13%;
+    border: 1px solid black;
 }
 tr{
     padding:15px;
-    border: 1px solid black;
 }
-td{
+.data{
     border: 1px solid black;
     padding:15px;
-    word-spacing: 50px;
-    text-align: left;
-    vertical-align: bottom;   
+    text-align: center;
+}
+td {
+    border-collapse: collapse;
+}
+button {
+    width:140px;
+    height: 50px;
 }

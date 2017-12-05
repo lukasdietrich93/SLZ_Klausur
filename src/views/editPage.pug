@@ -1,0 +1,31 @@
+html
+   head
+      title Klausurplaner Startseite
+   body
+      p Kontodaten eingeben zum einloggen
+      form(action = "/examedited", method = "POST")
+         div
+            label(for = "name") Name: 
+            input(name = "name" value = exam.name)
+         br
+         div
+            label(for = "date") Datum: 
+            input(name = "date" value = exam.date)
+         br
+         div
+            label(for = "total_hours") geplanter Zeitaufwand: 
+            input(name = "total_hours" value = exam.total_hours)
+         br
+         div
+            label(for = "spent_hours") erbrachter Zeitaufwand: 
+            input(name = "spent_hours" value = exam.spent_hours)
+         br
+         div
+            label(for = "status") Status: 
+            input(name = "status" value = exam.status)
+         br
+         button(type = "submit") Klausur editieren
+      
+      
+
+         

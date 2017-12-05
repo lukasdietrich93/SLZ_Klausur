@@ -43,6 +43,31 @@ class ExamController {
             return yield allExams;
         });
     }
+    showDetail(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = Object.values(ctx.params)[0];
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let editRepo = connection.getRepository(Exam_1.Exam);
+            let editExam = yield editRepo.findOneById(id);
+            yield ctx.render('editpage', { exam: yield editExam });
+        });
+    }
+    editExam(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let editRepo = connection.getRepository(Exam_1.Exam);
+            let name = ctx.request.header.referer;
+            name = name.replace("http://localhost:3000/exam/", "");
+            let currentExam = yield editRepo.findOneById({ id: name });
+            currentExam.name = ctx.request.body.name;
+            yield editRepo.save(currentExam);
+            var examcontroller = new ExamController;
+            var exams = examcontroller.findExams();
+            var str = JSON.stringify(yield exams);
+            yield ctx.render('overview', { exams: yield exams });
+            ctx.render('examedited', { exams: yield exams });
+        });
+    }
 }
 exports.ExamController = ExamController;
 //# sourceMappingURL=ExamController.js.map
