@@ -1,0 +1,15 @@
+html
+   head
+      title Klausurplaner Startseite
+      style
+        include style.css
+   body
+      p Klausur wirklich löschen?
+      form(action = "/examdeleted", method = "POST")
+         button(class='styled' type = "submit") Klausur löschen
+      a(class='edit' href='/overview') Zurück  
+      a(class='logout' href='/') Logout
+      
+      
+
+         

@@ -53,15 +53,23 @@ export class ExamController {
         let id = Object.values(ctx.params)[0];
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
-        let editExam = await editRepo.findOneById(id);
-        await ctx.render('editpage',{exam: await editExam});
+        let editedExam = await editRepo.findOneById(id);
+        await ctx.render('editpage',{exam: await editedExam});
+    }
+
+    public async showDelete(ctx: Router.IRouterContext, next: any){
+        let id = Object.values(ctx.params)[0];
+        const connection: Connection = await ConnectionClass.getInstance();
+        let editRepo = connection.getRepository(Exam);
+        let editedExam = await editRepo.findOneById(id);
+        await ctx.render('deletepage',{exam: await editedExam});
     }
     public async editExam(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
-        let name = ctx.request.header.referer;
-        name = name.replace("http://localhost:3000/exam/","");
-        let currentExam =await editRepo.findOneById({id : name});
+        let id = ctx.request.header.referer;
+        id = id.replace("http://localhost:3000/exam/","");
+        let currentExam =await editRepo.findOneById({id : id});
         currentExam.name = ctx.request.body.name;
         currentExam.date = ctx.request.body.date;
         currentExam.total_hours = ctx.request.body.total_hours;
@@ -71,8 +79,17 @@ export class ExamController {
         var examcontroller = new ExamController;
         var exams = examcontroller.findExams();
         var str =  JSON.stringify( await exams);
-        await ctx.render('overview',{exams: await exams});
-        ctx.render('examedited',{exams: await exams});
-        
+        await ctx.render('examedited',{exams: await exams});
+    }
+    public async deleteExam(ctx: Router.IRouterContext, next: any) {
+        const connection: Connection = await ConnectionClass.getInstance()
+        let deleteRepo = connection.getRepository(Exam);
+        let id = ctx.request.header.referer;
+        id = id.replace("http://localhost:3000/examedited/","");
+        let currentExam =await deleteRepo.findOneById({id : id});
+        await deleteRepo.remove(currentExam);
+        var examcontroller = new ExamController;
+        var exams = examcontroller.findExams();
+        await ctx.render('examdeleted',{exams: await exams});
     }
 }

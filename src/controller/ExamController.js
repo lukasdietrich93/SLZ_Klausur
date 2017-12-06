@@ -55,17 +55,26 @@ class ExamController {
             let id = Object.values(ctx.params)[0];
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
-            let editExam = yield editRepo.findOneById(id);
-            yield ctx.render('editpage', { exam: yield editExam });
+            let editedExam = yield editRepo.findOneById(id);
+            yield ctx.render('editpage', { exam: yield editedExam });
+        });
+    }
+    showDelete(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = Object.values(ctx.params)[0];
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let editRepo = connection.getRepository(Exam_1.Exam);
+            let editedExam = yield editRepo.findOneById(id);
+            yield ctx.render('deletepage', { exam: yield editedExam });
         });
     }
     editExam(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
-            let name = ctx.request.header.referer;
-            name = name.replace("http://localhost:3000/exam/", "");
-            let currentExam = yield editRepo.findOneById({ id: name });
+            let id = ctx.request.header.referer;
+            id = id.replace("http://localhost:3000/exam/", "");
+            let currentExam = yield editRepo.findOneById({ id: id });
             currentExam.name = ctx.request.body.name;
             currentExam.date = ctx.request.body.date;
             currentExam.total_hours = ctx.request.body.total_hours;
@@ -75,8 +84,20 @@ class ExamController {
             var examcontroller = new ExamController;
             var exams = examcontroller.findExams();
             var str = JSON.stringify(yield exams);
-            yield ctx.render('overview', { exams: yield exams });
-            ctx.render('examedited', { exams: yield exams });
+            yield ctx.render('examedited', { exams: yield exams });
+        });
+    }
+    deleteExam(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let deleteRepo = connection.getRepository(Exam_1.Exam);
+            let id = ctx.request.header.referer;
+            id = id.replace("http://localhost:3000/examedited/", "");
+            let currentExam = yield deleteRepo.findOneById({ id: id });
+            yield deleteRepo.remove(currentExam);
+            var examcontroller = new ExamController;
+            var exams = examcontroller.findExams();
+            yield ctx.render('examdeleted', { exams: yield exams });
         });
     }
 }
