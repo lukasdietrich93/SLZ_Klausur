@@ -12,7 +12,7 @@ import { Repository } from 'typeorm/repository/Repository';
 const session = require('koa-session');
 const Koa = require('koa');
 const app = new Koa();
- 
+app.keys = ["key1","key2"];
 
 export class LoginController {
   
@@ -53,10 +53,10 @@ export class LoginController {
         let studentRepo = connection.getRepository(Student);
         const mail = ctx.request.body.mail2;
         const student = await studentRepo.findOne({ mail: mail});
-        ctx.cookies.set('name','test',{signed: true});
-        console.log(ctx.cookies.get('test'));
+        ctx.cookies.set('name',mail ,{signed: true});
+        console.log(ctx.response.header);
         if(ctx.request.body.mail2 == student.mail){
-            if (ctx.request.body.password2 == student.password){
+            if (ctx.request.body.password2 ==  student.password){
                 ctx.render('loginsuccess',{context: await student.id});
                 return;
             }

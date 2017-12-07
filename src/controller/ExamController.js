@@ -37,7 +37,7 @@ class ExamController {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let id = ctx.cookies.request.rawHeaders[19];
-            id = id.replace("http://localhost:3000/addpage/", "");
+            id = id.replace("http://127.0.0.1:3000/addpage/", "");
             id = id.replace("?", "");
             let exam = new Exam_1.Exam();
             //jetzt käme das ausgelesene Formular
@@ -67,7 +67,7 @@ class ExamController {
         return __awaiter(this, void 0, void 0, function* () {
             let id = Object.values(ctx.params)[0];
             let origin = ctx.cookies.request.rawHeaders[11];
-            origin = origin.replace("http://localhost:3000/overview/", "");
+            origin = origin.replace("http://127.0.0.1:3000/overview/", "");
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
@@ -78,7 +78,7 @@ class ExamController {
         return __awaiter(this, void 0, void 0, function* () {
             let id = Object.values(ctx.params)[0];
             let origin = ctx.cookies.request.rawHeaders[11];
-            origin = origin.replace("http://localhost:3000/overview/", "");
+            origin = origin.replace("http://127.0.0.1:3000/overview/", "");
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
@@ -90,7 +90,7 @@ class ExamController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
             let id = ctx.request.header.referer;
-            id = id.replace("http://localhost:3000/editpage/", "");
+            id = id.replace("http://127.0.0.1:3000/editpage/", "");
             let currentExam = yield editRepo.findOneById({ id: id });
             currentExam.name = ctx.request.body.name;
             currentExam.date = ctx.request.body.date;
@@ -111,7 +111,7 @@ class ExamController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let deleteRepo = connection.getRepository(Exam_1.Exam);
             let id = ctx.request.header.referer;
-            id = id.replace("http://localhost:3000/deletepage/", "");
+            id = id.replace("http://127.0.0.1:3000/deletepage/", "");
             let currentExam = yield deleteRepo.findOneById({ id: id });
             yield deleteRepo.remove(currentExam);
             var examcontroller = new ExamController;
