@@ -9,6 +9,9 @@ import * as Router from "koa-router";
 import { Email } from 'sendmail';
 import { MailServer } from '../class/MailServerClass';
 import { Repository } from 'typeorm/repository/Repository';
+const session = require('koa-session');
+const Koa = require('koa');
+const app = new Koa();
  
 
 export class LoginController {
@@ -20,6 +23,7 @@ export class LoginController {
     public async createLogin(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         try{
+            console.log(app.use(session(app)));
             let studentRepo = connection.getRepository(Student);
             let a = ctx.request.body;
             let b = Object.values(a);
@@ -44,6 +48,7 @@ export class LoginController {
         }
     }
 
+
     public async Login(ctx: Router.IRouterContext, next: any){
         const connection: Connection = await ConnectionClass.getInstance();
         let studentRepo = connection.getRepository(Student);
@@ -51,7 +56,7 @@ export class LoginController {
         const student = await studentRepo.findOne({ mail: mail});
         if(ctx.request.body.mail2 == student.mail){
             if (ctx.request.body.password2 == student.password){
-                ctx.render('loginsuccess');
+                ctx.render('loginsuccess',{context: await student.id});
                 return;
             }
             else{

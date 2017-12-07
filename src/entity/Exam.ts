@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne} from "typeorm";
+import { Student } from "./Student";
 
 export enum Istatus{
     EXAM_DELETED,
@@ -37,9 +38,8 @@ export class Exam {
         default: false
     })
         reminder_status: boolean;
-    
-   /* @OneToOne(() => Student)
-    @JoinColumn()
-    student: Student; */
 
+    @OneToOne(type => Student)
+    @JoinColumn()
+    student: Student;
 }

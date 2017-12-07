@@ -5,7 +5,8 @@ html
         include style.css
    body
       p Login erfolgreich
-        form(action = "/addpage", method = "GET")
+        br
+        form(action = "/addpage/"+context, method = "GET")
           button(class='styled' type = "submit") Klausur hinzufügen
-        form(action = "/overview", method = "GET")
+        form(action = "/overview/"+context, method = "GET")
           button(class='styled' type = "submit") Übersicht anzeigen

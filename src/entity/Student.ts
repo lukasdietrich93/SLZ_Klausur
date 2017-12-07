@@ -1,4 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany} from "typeorm";
+import { Exam } from './Exam';
 
 @Entity()
 export class Student {
@@ -34,5 +36,6 @@ export class Student {
     
     @Column()
     hash: string;
+
 
 }

@@ -12,6 +12,9 @@ const MailController_1 = require("./MailController");
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 require("reflect-metadata");
+const session = require('koa-session');
+const Koa = require('koa');
+const app = new Koa();
 class LoginController {
     renderLogin(ctx, next) {
         ctx.render('registerform');
@@ -20,6 +23,7 @@ class LoginController {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             try {
+                console.log(app.use(session(app)));
                 let studentRepo = connection.getRepository(Student_1.Student);
                 let a = ctx.request.body;
                 let b = Object.values(a);
@@ -52,7 +56,7 @@ class LoginController {
             const student = yield studentRepo.findOne({ mail: mail });
             if (ctx.request.body.mail2 == student.mail) {
                 if (ctx.request.body.password2 == student.password) {
-                    ctx.render('loginsuccess');
+                    ctx.render('loginsuccess', { context: yield student.id });
                     return;
                 }
                 else {

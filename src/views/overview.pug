@@ -5,6 +5,7 @@ html
         include style.css
    body
       p Übersicht ihrer Klausuren:
+      p(class='center')=tip
       table    
         th Id
         th Name
@@ -21,9 +22,10 @@ html
                 td(class=data ? 'data' : 'data')= object.spent_hours
                 td(class=data ? 'data' : 'data')= object.status
                 td
-                  a(class='edit' href='/exam/'+object.id) Editieren
-                  a(class='edit' href='/examedited/'+object.id) Löschen
+                  a(class='edit' href='/editpage/'+object.id) Editieren
+                  a(class='edit' href='/deletepage/'+object.id) Löschen
         p
-          a(class='edit' href='/addpage') Weitere hinzufügen
+          form(action = "/addpage/"+id, method = "GET")
+            button(class='styled' type = "submit") Weitere hinzufügen
           a(class='logout' href='/') Logout
         

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const Student_1 = require("./Student");
 var Istatus;
 (function (Istatus) {
     Istatus[Istatus["EXAM_DELETED"] = 0] = "EXAM_DELETED";
@@ -55,6 +56,11 @@ __decorate([
     }),
     __metadata("design:type", Boolean)
 ], Exam.prototype, "reminder_status", void 0);
+__decorate([
+    typeorm_1.OneToOne(type => Student_1.Student),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", Student_1.Student)
+], Exam.prototype, "student", void 0);
 Exam = __decorate([
     typeorm_1.Entity()
 ], Exam);

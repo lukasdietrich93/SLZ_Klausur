@@ -43,16 +43,18 @@ app.use(bodyParser({
 }));
 
 router.get('/', loginController.renderLogin);
-router.get('/exam/:id', examController.showDetail);
-router.get('/examedited/:id', examController.showDelete);
-router.get('/addpage', examController.renderExam);
-router.get('/overview', examController.renderOverview);
+router.get('/editpage/:id', examController.showDetail);
+router.get('/examedited/:id', examController.renderOverview);
+router.get('/examdeleted/:id', examController.renderOverview);
+router.get('/deletepage/:id', examController.showDelete);;
+router.get('/addpage/:id', examController.renderExam);
+router.get('/overview/:id', examController.renderOverview);
 router.post('/register', loginController.createLogin);
 router.post('/login', loginController.Login);
 router.post('/activate', loginController.activateAccount);
-router.post('/overview', examController.createExam);
-router.post('/examedited', examController.editExam);
-router.post('/examdeleted', examController.deleteExam);
+router.post('/overview/:id', examController.createExam);
+router.post('/examedited/:id', examController.editExam);
+router.post('/examdeleted/:id', examController.deleteExam);
     app.use(router.routes());
 
     app.listen(3000);
