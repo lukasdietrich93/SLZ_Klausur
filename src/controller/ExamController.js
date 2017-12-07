@@ -122,6 +122,16 @@ class ExamController {
             ctx.redirect('/overview/' + url);
         });
     }
+    findId(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let studentRepo = connection.getRepository(Student_1.Student);
+            let mail = ctx.response.header;
+            let student = yield studentRepo.findOneById({ mail: mail });
+            console.log(ctx.cookies.get("lukasdietrich@netnexus.de"));
+            return student.id;
+        });
+    }
 }
 exports.ExamController = ExamController;
 //# sourceMappingURL=ExamController.js.map

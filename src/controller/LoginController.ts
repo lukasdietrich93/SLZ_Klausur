@@ -17,7 +17,7 @@ app.keys = ["key1","key2"];
 export class LoginController {
   
     public renderLogin(ctx: Router.IRouterContext, next: any) {
-        ctx.render('registerform');
+            ctx.render('registerform');
     }
 
     public async createLogin(ctx: Router.IRouterContext, next: any) {
@@ -54,7 +54,7 @@ export class LoginController {
         const mail = ctx.request.body.mail2;
         const student = await studentRepo.findOne({ mail: mail});
         ctx.cookies.set('name',mail ,{signed: true});
-        console.log(ctx.response.header);
+        let cookie = (Object.values(ctx.response.header));
         if(ctx.request.body.mail2 == student.mail){
             if (ctx.request.body.password2 ==  student.password){
                 ctx.render('loginsuccess',{context: await student.id});

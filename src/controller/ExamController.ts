@@ -111,4 +111,13 @@ export class ExamController {
         url = url.replace("?","");
         ctx.redirect('/overview/'+url);
     }
+    public async findId(ctx: Router.IRouterContext, next: any): Promise<any> {
+        const connection: Connection = await ConnectionClass.getInstance()
+        let studentRepo = connection.getRepository(Student);
+        let mail = ctx.response.header
+        let student = await studentRepo.findOneById({mail: mail})
+        console.log(ctx.cookies.get("lukasdietrich@netnexus.de"));
+        return student.id;
+
+    }
 }

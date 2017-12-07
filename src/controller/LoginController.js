@@ -55,7 +55,7 @@ class LoginController {
             const mail = ctx.request.body.mail2;
             const student = yield studentRepo.findOne({ mail: mail });
             ctx.cookies.set('name', mail, { signed: true });
-            console.log(ctx.response.header);
+            let cookie = (Object.values(ctx.response.header));
             if (ctx.request.body.mail2 == student.mail) {
                 if (ctx.request.body.password2 == student.password) {
                     ctx.render('loginsuccess', { context: yield student.id });
