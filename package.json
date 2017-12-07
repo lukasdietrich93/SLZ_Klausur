@@ -24,6 +24,7 @@
       "@types/node": "^8.0.53",
       "@types/sinon": "^4.0.0",
       "email": "0.2.6",
+      "keygrip": "1.0.2",
       "koa": "^2.4.1",
       "koa-body": "^2.5.0",
       "koa-pug": "^3.0.0-2",

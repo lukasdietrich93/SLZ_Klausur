@@ -12,6 +12,7 @@ import { ExamController } from "./controller/ExamController";
 const bodyParser = require('koa-body');
 const app = new Koa();
 const router = new Router();
+const session = require('koa-session');
 
 /**
  * Make sure koa request knows the new "body" property.
@@ -55,6 +56,6 @@ router.post('/activate', loginController.activateAccount);
 router.post('/overview/:id', examController.createExam);
 router.post('/examedited/:id', examController.editExam);
 router.post('/examdeleted/:id', examController.deleteExam);
+app.keys = ["key1","key2"];
     app.use(router.routes());
-
     app.listen(3000);

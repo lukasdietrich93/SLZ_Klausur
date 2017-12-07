@@ -48,6 +48,7 @@ export class ExamController {
         exam.spent_hours = b[3];
         exam.status = b[4];
         let studentRepo = connection.getRepository(Student);
+        exam.student = await studentRepo.findOneById(id);
         let examRepo = connection.getRepository(Exam);
         await examRepo.save(exam);
         ctx.redirect('/overview/'+id);

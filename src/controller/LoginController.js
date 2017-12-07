@@ -23,7 +23,6 @@ class LoginController {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             try {
-                console.log(app.use(session(app)));
                 let studentRepo = connection.getRepository(Student_1.Student);
                 let a = ctx.request.body;
                 let b = Object.values(a);
@@ -54,6 +53,8 @@ class LoginController {
             let studentRepo = connection.getRepository(Student_1.Student);
             const mail = ctx.request.body.mail2;
             const student = yield studentRepo.findOne({ mail: mail });
+            ctx.cookies.set('name', 'test', { signed: true });
+            console.log(ctx.cookies.get('test'));
             if (ctx.request.body.mail2 == student.mail) {
                 if (ctx.request.body.password2 == student.password) {
                     ctx.render('loginsuccess', { context: yield student.id });

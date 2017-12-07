@@ -23,7 +23,6 @@ export class LoginController {
     public async createLogin(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         try{
-            console.log(app.use(session(app)));
             let studentRepo = connection.getRepository(Student);
             let a = ctx.request.body;
             let b = Object.values(a);
@@ -54,6 +53,8 @@ export class LoginController {
         let studentRepo = connection.getRepository(Student);
         const mail = ctx.request.body.mail2;
         const student = await studentRepo.findOne({ mail: mail});
+        ctx.cookies.set('name','test',{signed: true});
+        console.log(ctx.cookies.get('test'));
         if(ctx.request.body.mail2 == student.mail){
             if (ctx.request.body.password2 == student.password){
                 ctx.render('loginsuccess',{context: await student.id});
