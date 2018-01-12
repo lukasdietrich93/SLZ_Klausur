@@ -20,6 +20,7 @@ export class ExamController {
         let id = await ctx.request.url
         id =  id.replace("/addpage/","");
         id =  id.replace("?","");
+        console.log(id);
         var examcontroller = new ExamController;
         var exams = examcontroller.findExams();
         ctx.render('addpage',{id: id});
@@ -30,12 +31,15 @@ export class ExamController {
         id =  id.replace("?","");
         var examcontroller = new ExamController;
         var exams = await examcontroller.findExams(id);
-        ctx.render('overview',{exams: exams, id: id});
+        let tipcontroller = new TipController;
+        let newtip = await tipcontroller.getRandomTip();
+        ctx.render('overview',{exams: exams, id: id, tip: newtip.content});
+
     }
     public async createExam(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         let id = ctx.cookies.request.rawHeaders[19];
-        id =  id.replace("http://127.0.0.1:3000/addpage/","");
+        id =  id.replace("http://localhost:3000/addpage/","");
         id =  id.replace("?","");
         let exam = new Exam();
         //jetzt käme das ausgelesene Formular
@@ -62,7 +66,7 @@ export class ExamController {
     public async showDetail(ctx: Router.IRouterContext, next: any){
         let id = Object.values(ctx.params)[0];
         let origin =  ctx.cookies.request.rawHeaders[11]
-        origin = origin.replace("http://127.0.0.1:3000/overview/","");
+        origin = origin.replace("http://localhost:3000/overview/","");
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
         let editedExam = await editRepo.findOneById(id);
@@ -72,7 +76,7 @@ export class ExamController {
     public async showDelete(ctx: Router.IRouterContext, next: any){
         let id = Object.values(ctx.params)[0];
         let origin =  ctx.cookies.request.rawHeaders[11]
-        origin = origin.replace("http://127.0.0.1:3000/overview/","");
+        origin = origin.replace("http://localhost:3000/overview/","");
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
         let editedExam = await editRepo.findOneById(id);
@@ -82,7 +86,7 @@ export class ExamController {
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
         let id = ctx.request.header.referer;
-        id = id.replace("http://127.0.0.1:3000/editpage/","");
+        id = id.replace("http://localhost:3000/editpage/","");
         let currentExam =await editRepo.findOneById({id : id});
         currentExam.name = ctx.request.body.name;
         currentExam.date = ctx.request.body.date;
@@ -101,7 +105,7 @@ export class ExamController {
         const connection: Connection = await ConnectionClass.getInstance()
         let deleteRepo = connection.getRepository(Exam);
         let id = ctx.request.header.referer;
-        id = id.replace("http://127.0.0.1:3000/deletepage/","");
+        id = id.replace("http://localhost:3000/deletepage/","");
         let currentExam =await deleteRepo.findOneById({id : id});
         await deleteRepo.remove(currentExam);
         var examcontroller = new ExamController;
