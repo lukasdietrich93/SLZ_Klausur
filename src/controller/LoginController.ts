@@ -55,14 +55,16 @@ export class LoginController {
         const student = await studentRepo.findOne({ mail: mail});
         ctx.cookies.set('name',mail ,{signed: true});
         let cookie = (Object.values(ctx.response.header));
-        if(ctx.request.body.mail2 == student.mail){
-            if (ctx.request.body.password2 ==  student.password){
-                ctx.render('loginsuccess',{context: await student.id});
-                return;
+        try{
+            if(ctx.request.body.mail2 == student.mail){
+               if (ctx.request.body.password2 ==  student.password){
+                    ctx.render('loginsuccess',{context: await student.id});
+                    return;
+                }
             }
-            else{
-                ctx.render('loginfailed');
-            }
+        }
+        catch(e){
+            ctx.render('loginfailed');
         }
     }
 
