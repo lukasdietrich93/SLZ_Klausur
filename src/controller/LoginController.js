@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const js_sha256_1 = require("js-sha256");
 const MailController_1 = require("./MailController");
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
@@ -29,7 +30,7 @@ class LoginController {
                 let b = Object.values(a);
                 let student = new Student_1.Student();
                 student.mail = b[0];
-                student.password = b[1],
+                student.password = js_sha256_1.sha256(b[1]),
                     student.faculty_id = b[2];
                 student.active = false;
                 student.hash = Math.random().toString(36).substring(7);
@@ -58,7 +59,7 @@ class LoginController {
             let cookie = (Object.values(ctx.response.header));
             try {
                 if (ctx.request.body.mail2 == student.mail) {
-                    if (ctx.request.body.password2 == student.password) {
+                    if (js_sha256_1.sha256(ctx.request.body.password2) == student.password) {
                         ctx.render('loginsuccess', { context: yield student.id });
                         return;
                     }
@@ -110,9 +111,9 @@ class LoginController {
             try {
                 console.log(student.password);
                 console.log(ctx.request.body.password2);
-                if (student.password == ctx.request.body.password2) {
+                if (student.password == js_sha256_1.sha256(ctx.request.body.password2)) {
                     if (ctx.request.body.password3 == ctx.request.body.password4) {
-                        student.password = ctx.request.body.password3;
+                        student.password = js_sha256_1.sha256(ctx.request.body.password3);
                         yield studentRepo.save(student);
                         ctx.render('pwreset');
                     }

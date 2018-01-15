@@ -1,3 +1,4 @@
+import { sha256} from 'js-sha256';
 import { MailController } from './MailController';
 import { Istatus } from '../entity/Exam';
 import { ConnectionClass } from '../class/ConnectionClass';
@@ -28,7 +29,7 @@ export class LoginController {
             let b = Object.values(a);
             let student = new Student();
             student.mail = b[0];
-            student.password = b[1],
+            student.password = sha256(b[1]),
             student.faculty_id = b[2];
             student.active = false;
             student.hash = Math.random().toString(36).substring(7);
@@ -57,7 +58,7 @@ export class LoginController {
         let cookie = (Object.values(ctx.response.header));
         try{
             if(ctx.request.body.mail2 == student.mail){
-               if (ctx.request.body.password2 ==  student.password){
+               if (sha256(ctx.request.body.password2) ==  student.password){
                     ctx.render('loginsuccess',{context: await student.id});
                     return;
                 }else{
@@ -103,9 +104,9 @@ export class LoginController {
         try{
             console.log(student.password);
             console.log(ctx.request.body.password2);
-            if(student.password == ctx.request.body.password2){
+            if(student.password == sha256(ctx.request.body.password2)){
                 if(ctx.request.body.password3 == ctx.request.body.password4){
-                    student.password = ctx.request.body.password3;
+                    student.password = sha256(ctx.request.body.password3);
                     await studentRepo.save(student);
                     ctx.render('pwreset');
                 }else{
