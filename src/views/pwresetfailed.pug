@@ -5,6 +5,7 @@ html
         include style.css
    body
       p Kontodaten eingeben zum einloggen
+      p(class = "failed") Ihr Passwort konnte nicht geändert werden. Die eingegebenen Daten sind nicht korrekt.
       form(action = "/login", method = "POST")
          div
             label(for = "mail") E-Mail: 

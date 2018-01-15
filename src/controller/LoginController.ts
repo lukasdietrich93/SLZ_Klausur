@@ -85,4 +85,34 @@ export class LoginController {
             ctx.render('failed');
         }
     }
+
+    public async changePassword(ctx: Router.IRouterContext, next: any){
+            ctx.render('changepw')
+    }
+
+    public async resetPassword(ctx: Router.IRouterContext, next: any){
+        const connection: Connection = await ConnectionClass.getInstance();
+        let studentRepo = connection.getRepository(Student);
+        const mail = ctx.request.body.mail2;
+        const student = await studentRepo.findOne({ mail: mail});
+        console.log(student);
+        try{
+        if(student.password = ctx.request.body.password2){
+            console.log(ctx.request.body);
+            if(ctx.request.body.password3 == ctx.request.body.password4){
+                student.password = ctx.request.body.password3;
+                 await studentRepo.save(student);
+                 ctx.render('pwreset');
+            }
+            else{
+                ctx.render('pwresetfailed');
+            }
+        }else{
+            ctx.render('pwresetfailed');
+        }
+        }
+        catch(e){
+            ctx.render('pwresetfailed');
+        }
+    }
 }

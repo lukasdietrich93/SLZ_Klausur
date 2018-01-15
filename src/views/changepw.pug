@@ -1,0 +1,28 @@
+html
+   head
+      title Klausurplaner Startseite
+      style
+        include style.css
+   body
+      p Kontodaten eingeben um das Passwort zu ändern
+      form(action = "/pwreset", method = "POST")
+         div
+            label(for = "mail") E-Mail: 
+            input(name = "mail2" value = "")
+         br
+         div
+            label(for = "password") Passwort: 
+            input(name = "password2" value = "")
+         br
+         div
+            label(for = "password") neues Passwort: 
+            input(name = "password3" value = "")
+         br
+         div
+            label(for = "password") Passwort wiederholen: 
+            input(name = "password4" value = "")
+         br
+         button(class='styled' type = "submit") Passwort ändern
+
+
+         

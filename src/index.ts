@@ -53,6 +53,8 @@ router.get('/overview/:id', examController.renderOverview);
 router.post('/register', loginController.createLogin);
 router.post('/login', loginController.Login);
 router.post('/activate', loginController.activateAccount);
+router.get('/changepw',loginController.changePassword);
+router.post('/pwreset',loginController.resetPassword);
 router.post('/overview/:id', examController.createExam);
 router.post('/examedited/:id', examController.editExam);
 router.post('/examdeleted/:id', examController.deleteExam);

@@ -89,6 +89,39 @@ class LoginController {
             }
         });
     }
+    changePassword(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            ctx.render('changepw');
+        });
+    }
+    resetPassword(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let studentRepo = connection.getRepository(Student_1.Student);
+            const mail = ctx.request.body.mail2;
+            const student = yield studentRepo.findOne({ mail: mail });
+            console.log(student);
+            try {
+                if (student.password = ctx.request.body.password2) {
+                    console.log(ctx.request.body);
+                    if (ctx.request.body.password3 == ctx.request.body.password4) {
+                        student.password = ctx.request.body.password3;
+                        yield studentRepo.save(student);
+                        ctx.render('pwreset');
+                    }
+                    else {
+                        ctx.render('pwresetfailed');
+                    }
+                }
+                else {
+                    ctx.render('pwresetfailed');
+                }
+            }
+            catch (e) {
+                ctx.render('pwresetfailed');
+            }
+        });
+    }
 }
 exports.LoginController = LoginController;
 //# sourceMappingURL=LoginController.js.map
