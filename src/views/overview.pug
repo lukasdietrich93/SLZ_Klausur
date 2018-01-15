@@ -1,39 +1,25 @@
 html
    head
-      link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css', integrity='sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy', crossorigin='anonymous')
-      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js', integrity='sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4', crossorigin='anonymous')
-      script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+    include header.pug
       title Form Tester
       style
         include style.css
    body
       p Übersicht ihrer Klausuren:
       p(class='center')="Tipp des Tages: "+tip
-      table(class="table")
-        thead(class="thead-dark")
-          tr
-            th Id
-            th Name
-            th Datum
-            th Zeitaufwand gesamt
-            th erbrachter Zeitaufwand
-            th Erinnerungsstatus
-          tr
-        tbody
           for object in exams
-              tr
-                td(class=data ? 'data' : 'data')= object.id
-                td(class=data ? 'data' : 'data')= object.name
-                td(class=data ? 'data' : 'data')= object.date
-                td(class=data ? 'data' : 'data')= object.total_hours                  
-                td(class=data ? 'data' : 'data')= object.spent_hours
-                td(class=data ? 'data' : 'data')= object.status
-                td
-                  a.btn.btn-primary(href='/editpage/'+object.id) Editieren
-                  a.btn.btn-primary(href='/deletepage/'+object.id) Löschen
-        p
-          form(action = "/addpage/"+id, method = "GET")
-            button.btn.btn-primary(type='submit') Weitere hinzufügen
-          a.btn.btn-primary(href='/') Logout
+            div(class="card" style="width:18rem; margin:15px;")
+              h5(class="card-header")="Prüfungsname : "+object.name
+              div(class="card-body")
+                h5(class="card-title")="Datum der Prüfung : "+object.date
+              ul(class="list-group list-group-flush")
+                li(class="list-group-item")="Insgesamt zu leistende Stunden : "+object.total_hours
+                li(class="list-group-item")="Bereits geleistete Stunden : "+object.spent_hours
+                li(class="list-group-item")="Status : "+object.status
+              a.btn.btn-primary(href='/editpage/'+object.id) Editieren
+              a.btn.btn-primary(href='/deletepage/'+object.id) Löschen
+      p
+        form(action = "/addpage/"+id, method = "GET")
+        button.btn.btn-primary(type='submit') Weitere hinzufügen
+        a.btn.btn-primary(href='/') Logout
         
