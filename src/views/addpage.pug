@@ -5,27 +5,30 @@ html
       script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
       title Klausurplaner Startseite
+      style 
+        include style.css
    body
-      p Klausurdaten eingeben
-      form(action = "/overview/"+id, method = "POST") 
-         div
-            label(for = "name") Name: 
-            input(name = "name" value = "")
-         br
-         div
-            label(for = "date") Datum: 
-            input(name = "date" value = "")
-         br
-         div
-            label(for = "total_hours") geplanter Zeitaufwand: 
-            input(name = "total_hours" value = "")
-         br
-         div
-            label(for = "spent_hours") erbrachter Zeitaufwand: 
-            input(name = "spent_hours" value = "")
-         br
-         div
-            label(for = "status") Status: 
-            input(name = "status" value = "")
-         br
-         button(class='styled' type = "submit") Klausur erstellen         
+   form(action = "/overview/"+id, method = "POST") 
+        .form-group.row
+        label.col-sm-2.col-form-label(for='name') Name
+        .col-sm-10
+            input#inputEmail3.form-control(name='name', placeholder='Name')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='name') Datum
+        .col-sm-10
+            input#inputEmail3.form-control(name='date', placeholder='Datum')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
+        .col-sm-10
+            input#inputEmail3.form-control(name='total_hours', placeholder='Gesamtzahl Stunden')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='total_hours') gearbeitete Stunden
+        .col-sm-10
+            input#inputEmail3.form-control(name='spent_hours', placeholder='gearbeitete Stunden')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='status') Status
+        .col-sm-10
+            input#inputEmail3.form-control(name='status', placeholder='Status')
+            fieldset.form-group
+        .row
+        button.btn.btn-primary(type='submit') Klausur erstellen

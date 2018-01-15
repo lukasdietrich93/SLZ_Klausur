@@ -62,6 +62,12 @@ class LoginController {
                         ctx.render('loginsuccess', { context: yield student.id });
                         return;
                     }
+                    else {
+                        ctx.render('loginfailed');
+                    }
+                }
+                else {
+                    ctx.render('loginfailed');
                 }
             }
             catch (e) {
@@ -99,26 +105,27 @@ class LoginController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let studentRepo = connection.getRepository(Student_1.Student);
             const mail = ctx.request.body.mail2;
+            console.log(mail);
             const student = yield studentRepo.findOne({ mail: mail });
-            console.log(student);
             try {
-                if (student.password = ctx.request.body.password2) {
-                    console.log(ctx.request.body);
+                console.log(student.password);
+                console.log(ctx.request.body.password2);
+                if (student.password == ctx.request.body.password2) {
                     if (ctx.request.body.password3 == ctx.request.body.password4) {
                         student.password = ctx.request.body.password3;
                         yield studentRepo.save(student);
                         ctx.render('pwreset');
                     }
                     else {
-                        ctx.render('pwresetfailed');
+                        throw new Error("new passwords are not matching");
                     }
                 }
                 else {
-                    ctx.render('pwresetfailed');
+                    throw new Error("wrong password");
                 }
             }
             catch (e) {
-                ctx.render('pwresetfailed');
+                ctx.render('pwresetfailed', { error: e });
             }
         });
     }

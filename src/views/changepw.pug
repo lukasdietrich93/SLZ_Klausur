@@ -5,27 +5,29 @@ html
       script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
       title Klausurplaner Startseite
+      style
+        include style.css
 
    body
       p Kontodaten eingeben um das Passwort zu ändern
-      form(action = "/pwreset", method = "POST")
-         div
-            label(for = "mail") E-Mail: 
-            input(name = "mail2" value = "")
-         br
-         div
-            label(for = "password") Passwort: 
-            input(name = "password2" value = "")
-         br
-         div
-            label(for = "password") neues Passwort: 
-            input(name = "password3" value = "")
-         br
-         div
-            label(for = "password") Passwort wiederholen: 
-            input(name = "password4" value = "")
-         br
-         button(class='styled' type = "submit") Passwort ändern
 
-
-         
+        form(action = "/pwreset", method = "POST") 
+                .form-group.row
+                label.col-sm-2.col-form-label(for='mail') E-Mail
+                .col-sm-10
+                    input#inputEmail3.form-control(name='mail2', placeholder='E-Mail')
+                .form-group.row
+                label.col-sm-2.col-form-label(for='password') Passwort
+                .col-sm-10
+                    input#inputEmail3.form-control(name='password2', placeholder='Passwort')
+                .form-group.row
+                label.col-sm-2.col-form-label(for='password') neues Passwort
+                .col-sm-10
+                    input#inputEmail3.form-control(name='password3', placeholder='neues Passwort')
+                .form-group.row
+                label.col-sm-2.col-form-label(for='password') Passwort wiederholen
+                .col-sm-10
+                    input#inputEmail3.form-control(name='password4', placeholder='Passwort wiederholen')
+                    fieldset.form-group
+                .row
+                button.btn.btn-primary(type='submit') Passwort ändern

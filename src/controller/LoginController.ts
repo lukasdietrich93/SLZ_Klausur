@@ -60,7 +60,11 @@ export class LoginController {
                if (ctx.request.body.password2 ==  student.password){
                     ctx.render('loginsuccess',{context: await student.id});
                     return;
+                }else{
+                    ctx.render('loginfailed');
                 }
+            }else{
+                ctx.render('loginfailed');
             }
         }
         catch(e){
@@ -94,25 +98,25 @@ export class LoginController {
         const connection: Connection = await ConnectionClass.getInstance();
         let studentRepo = connection.getRepository(Student);
         const mail = ctx.request.body.mail2;
+        console.log(mail);
         const student = await studentRepo.findOne({ mail: mail});
-        console.log(student);
         try{
-        if(student.password = ctx.request.body.password2){
-            console.log(ctx.request.body);
-            if(ctx.request.body.password3 == ctx.request.body.password4){
-                student.password = ctx.request.body.password3;
-                 await studentRepo.save(student);
-                 ctx.render('pwreset');
+            console.log(student.password);
+            console.log(ctx.request.body.password2);
+            if(student.password == ctx.request.body.password2){
+                if(ctx.request.body.password3 == ctx.request.body.password4){
+                    student.password = ctx.request.body.password3;
+                    await studentRepo.save(student);
+                    ctx.render('pwreset');
+                }else{
+                    throw new Error("new passwords are not matching");
+                }
+            }else{
+                throw new Error("wrong password");
             }
-            else{
-                ctx.render('pwresetfailed');
-            }
-        }else{
-            ctx.render('pwresetfailed');
-        }
         }
         catch(e){
-            ctx.render('pwresetfailed');
+            ctx.render('pwresetfailed',{error: e});
         }
     }
 }

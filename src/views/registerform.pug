@@ -1,46 +1,46 @@
 html
    head
+      meta(charset='utf-8')
+      meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
       link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css', integrity='sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy', crossorigin='anonymous')
-      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js', integrity='sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4', crossorigin='anonymous')
       script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js', integrity='sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4', crossorigin='anonymous')
       title Klausurplaner Startseite
+      style
+        include style.css
 
    body
-      p Kontodaten eingeben zum einloggen
-      form(action = "/login", method = "POST")
-         div
-            label(for = "mail") E-Mail: 
-            input(name = "mail2" value = "")
-         br
-         div
-            label(for = "password") Passwort: 
-            input(name = "password2" value = "")
-         br
-         button(class='styled' type = "submit") Login
-         a(class='edit' href='/changepw/') Passwort ändern
-         br
+    p Sind Sie bereits registriert? Dann melden Sie sich hier an
+    form(action = "/login", method = "POST") 
+        .form-group.row
+        label.col-sm-2.col-form-label(for='mail') Mail
+        .col-sm-10
+            input#inputEmail3.form-control(name='mail2', placeholder='Mail')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='password') Passwort
+        .col-sm-10
+            input#inputEmail3.form-control(name='password2', placeholder='Passwort')
+            fieldset.form-group
+        .row
+        button.btn.btn-primary(type='submit') Login
+        a.btn.btn-primary(href="/changepw/") Passwort ändern
+    p Sie haben noch kein Konto? Hier können Sie sich registrieren
+        
+    form(action = "/register", method = "POST") 
+        .form-group.row
+        label.col-sm-2.col-form-label(for='mail') Mail
+        .col-sm-10
+            input#inputEmail3.form-control(name='mail', placeholder='Mail')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='password') Passwort
+        .col-sm-10
+            input#inputEmail3.form-control(name='password', placeholder='Passwort')
+        .form-group.row
+        label.col-sm-2.col-form-label(for='faculty') Studiengang
+        .col-sm-10
+            input#inputEmail3.form-control(name='faculty', placeholder='Studiengang')
+            fieldset.form-group
+        .row
+        button.btn.btn-primary(type='submit') Registrieren
 
-         br
-         br
-         br
-         br
-      p Sie haben noch kein Konto? Hier können Sie sich registrieren
-      form(action = "/register", method = "POST")
-         div
-            label(for = "mail") E-Mail: 
-            input(name = "mail" value = "")
-         br
-         div
-            label(for = "password") Passwort: 
-            input(name = "password" value = "")
-         br
-         div
-            label(for = "faculty") Studiengang: 
-            input(name = "faculty" value = "")
-         br
-         button(class='styled' type = "submit") Registrieren
-         
-         br
-
-         

@@ -6,14 +6,15 @@ html
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
       title Form Tester
       style
+        include style.css
    body
-      form(action = "/activate", method = "POST")
-         div
-            label(for = "mail") E-Mail: 
-            input(name = "mail" value = "")
-         br
-         div
-            label(for = "Code") Code: 
-            input(name = "Code" value = "")
-         br
-         button(class='styled' type = "Konto aktivieren") Konto aktivieren
+        form(action = "/activate", method = "POST") 
+                .form-group.row
+                label.col-sm-2.col-form-label(for='mail') Mail
+                .col-sm-10
+                    input#inputEmail3.form-control(name='mail', placeholder='Mail')
+                .form-group.row
+                label.col-sm-2.col-form-label(for='Code') Code
+                .col-sm-10
+                    input#inputEmail3.form-control(name='Code', placeholder='Code')
+                button.btn.btn-primary(type='submit') Konto aktivieren

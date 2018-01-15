@@ -6,12 +6,14 @@ html
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
       title Klausurplaner Startseite
       style
-    body
+        include style.css
+      style
+   body
       p Klausur wirklich löschen?
       form(action = "/examdeleted/"+origin, method = "POST")
-         button(class='styled' type = "submit") Klausur löschen
-      a(class='edit' href='/overview/'+origin) Zurück 
-      a(class='logout' href='/') Logout
+         button.btn.btn-primary(type='submit') Klausur löschen
+      a.btn.btn-primary(href='/overview/'+origin) Zurück 
+      a.btn.btn-primary(href='/') Logout
       
       
 

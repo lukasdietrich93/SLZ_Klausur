@@ -6,10 +6,11 @@ html
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
       title Form Tester
       style
+        include style.css
    body
       p Login erfolgreich
         br
         form(action = "/addpage/"+context, method = "GET")
-          button(class='styled' type = "submit") Klausur hinzufügen
+          button.btn.btn-primary(type='submit') Klausur hinzufügen
         form(action = "/overview/"+context, method = "GET")
-          button(class='styled' type = "submit") Übersicht anzeigen
+          button.btn.btn-primary(type='submit') Übersicht anzeigen
