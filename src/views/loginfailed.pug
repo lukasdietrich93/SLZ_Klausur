@@ -1,5 +1,43 @@
 html
    head
-      title Form Tester
+      title Klausurplaner Startseite
+      style
+        include style.css
    body
-      p login failed
+      p Kontodaten eingeben zum einloggen
+      p(class = "failed") Die eingegebenen Daten waren nicht korrekt. Versuchen Sie es erneut.
+      form(action = "/login", method = "POST")
+         div
+            label(for = "mail") E-Mail: 
+            input(name = "mail2" value = "")
+         br
+         div
+            label(for = "password") Passwort: 
+            input(name = "password2" value = "")
+         br
+         button(class='styled' type = "submit") Login
+         br
+
+         br
+         br
+         br
+         br
+      p Sie haben noch kein Konto? Hier können Sie sich registrieren
+      form(action = "/register", method = "POST")
+         div
+            label(for = "mail") E-Mail: 
+            input(name = "mail" value = "")
+         br
+         div
+            label(for = "password") Passwort: 
+            input(name = "password" value = "")
+         br
+         div
+            label(for = "faculty") Studiengang: 
+            input(name = "faculty" value = "")
+         br
+         button(class='styled' type = "submit") Registrieren
+         
+         br
+
+         
