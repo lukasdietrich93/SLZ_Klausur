@@ -1,6 +1,7 @@
 html
    head
     include header.pug
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
       title Form Tester
       style
         include style.css
@@ -22,4 +23,14 @@ html
         form(action = "/addpage/"+id, method = "GET")
           button.btn.btn-primary(type='submit') Weitere hinzufügen
         a.btn.btn-primary(href='/') Logout
-        
+      canvas(id="myChart" width="100" height="100")
+      script.
+        var ctx = document.getElementById("myChart");
+        var myChar = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              datasets: [{
+                  data: [5,10],
+            }],
+          labels: ['Red', 'Blue', 'Purple', 'Yellow']
+        }});
