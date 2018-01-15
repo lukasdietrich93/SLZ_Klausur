@@ -16,7 +16,7 @@ class TipController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let tip = new Tips_1.Tips;
             let tipRepo = connection.getRepository(Tips_1.Tips);
-            let rndtipnumber = Math.floor(Math.random() * 10);
+            let rndtipnumber = Math.floor(Math.random() * 10) + 1;
             let test = yield tipRepo.findOneById(rndtipnumber);
             return test;
         });
