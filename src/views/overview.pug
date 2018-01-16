@@ -24,7 +24,8 @@ html
                   a(href='/deletepage/'+object.id) Löschen
                   canvas(id=""+object.id width="100" height="100")
                   div(class="donut-inner")
-                    h5=object.spent_hours + " / " +object.total_hours
+                    h5=object.spent_hours + "h"
+                    h4="von "+object.total_hours+"h"
 
                   script.
                     var id = document.getElementById("grabber").innerHTML;
