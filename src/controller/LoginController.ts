@@ -99,11 +99,8 @@ export class LoginController {
         const connection: Connection = await ConnectionClass.getInstance();
         let studentRepo = connection.getRepository(Student);
         const mail = ctx.request.body.mail2;
-        console.log(mail);
         const student = await studentRepo.findOne({ mail: mail});
         try{
-            console.log(student.password);
-            console.log(ctx.request.body.password2);
             if(student.password == sha256(ctx.request.body.password2)){
                 if(ctx.request.body.password3 == ctx.request.body.password4){
                     student.password = sha256(ctx.request.body.password3);

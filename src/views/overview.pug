@@ -1,11 +1,7 @@
 html
-   head
+  head
     include header.pug
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
-      title Form Tester
-      script
-        include style.css
-   body
+  body
       p Übersicht ihrer Klausuren:
       p(class='center')="Tipp des Tages: "+tip
           for object in exams
@@ -13,7 +9,9 @@ html
               div(id="grabber")=object.id
               h5(class="card-header")="Prüfungsname : "+object.name
               div(class="card-body")
-                h5(class="card-title")="Datum der Prüfung : "+object.date
+                -var date = JSON.stringify(object.date).substring(1,11);
+                -object.date=date;
+                h5(class="card-title")=date
               ul(class="list-group list-group-flush")
                 li(class="list-group-item" id="hours1")=object.total_hours
                 li(class="list-group-item" id="hours2")=object.spent_hours

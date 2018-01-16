@@ -20,7 +20,6 @@ export class ExamController {
         let id = await ctx.request.url
         id =  id.replace("/addpage/","");
         id =  id.replace("?","");
-        console.log(id);
         var examcontroller = new ExamController;
         var exams = examcontroller.findExams();
         ctx.render('addpage',{id: id});
@@ -64,20 +63,20 @@ export class ExamController {
     }
 
     public async showDetail(ctx: Router.IRouterContext, next: any){
+        const connection: Connection = await ConnectionClass.getInstance();
         let id = Object.values(ctx.params)[0];
         let origin =  ctx.cookies.request.rawHeaders[11]
         origin = origin.replace("http://localhost:3000/overview/","");
-        const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
         let editedExam = await editRepo.findOneById(id);
         await ctx.render('editpage',{exam: await editedExam, origin: origin, object: editedExam});
     }
 
     public async showDelete(ctx: Router.IRouterContext, next: any){
+        const connection: Connection = await ConnectionClass.getInstance();
         let id = Object.values(ctx.params)[0];
         let origin =  ctx.cookies.request.rawHeaders[11]
         origin = origin.replace("http://localhost:3000/overview/","");
-        const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
         let editedExam = await editRepo.findOneById(id);
         await ctx.render('deletepage',{exam: await editedExam, origin: origin});

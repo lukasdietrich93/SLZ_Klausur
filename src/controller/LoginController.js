@@ -107,11 +107,8 @@ class LoginController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let studentRepo = connection.getRepository(Student_1.Student);
             const mail = ctx.request.body.mail2;
-            console.log(mail);
             const student = yield studentRepo.findOne({ mail: mail });
             try {
-                console.log(student.password);
-                console.log(ctx.request.body.password2);
                 if (student.password == js_sha256_1.sha256(ctx.request.body.password2)) {
                     if (ctx.request.body.password3 == ctx.request.body.password4) {
                         student.password = js_sha256_1.sha256(ctx.request.body.password3);

@@ -20,7 +20,6 @@ class ExamController {
             let id = yield ctx.request.url;
             id = id.replace("/addpage/", "");
             id = id.replace("?", "");
-            console.log(id);
             var examcontroller = new ExamController;
             var exams = examcontroller.findExams();
             ctx.render('addpage', { id: id });
@@ -70,10 +69,10 @@ class ExamController {
     }
     showDetail(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let id = Object.values(ctx.params)[0];
             let origin = ctx.cookies.request.rawHeaders[11];
             origin = origin.replace("http://localhost:3000/overview/", "");
-            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
             yield ctx.render('editpage', { exam: yield editedExam, origin: origin, object: editedExam });
@@ -81,10 +80,10 @@ class ExamController {
     }
     showDelete(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let id = Object.values(ctx.params)[0];
             let origin = ctx.cookies.request.rawHeaders[11];
             origin = origin.replace("http://localhost:3000/overview/", "");
-            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
             yield ctx.render('deletepage', { exam: yield editedExam, origin: origin });

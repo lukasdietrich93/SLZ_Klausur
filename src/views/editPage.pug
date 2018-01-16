@@ -1,9 +1,8 @@
 html
-   head
+  head
     include header.pug
-      title Klausurplaner Startseite
-   body
-   form(action = "/examedited/"+origin, method = "POST") 
+  body
+    form(action = "/examedited/"+origin, method = "POST") 
         .form-group.row
         label.col-sm-2.col-form-label(for='name') Name
         .col-sm-10
@@ -11,7 +10,8 @@ html
         .form-group.row
         label.col-sm-2.col-form-label(for='name') Datum
         .col-sm-10
-            input#inputEmail3.form-control(name='date', value=object.date)
+        -console.log(object.date);
+            input#inputEmail3.form-control(name='date',type="date", value=JSON.stringify(object.date).substring(1,11))
         .form-group.row
         label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
         .col-sm-10

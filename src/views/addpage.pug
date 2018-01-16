@@ -1,8 +1,6 @@
 html
    head
     include header.pug
-      style 
-        include style.css
    body
    form(action = "/overview/"+id, method = "POST") 
         .form-group.row
@@ -12,7 +10,7 @@ html
         .form-group.row
         label.col-sm-2.col-form-label(for='name') Datum
         .col-sm-10
-            input#inputEmail3.form-control(name='date', placeholder='Datum')
+            input#inputEmail3.form-control(name='date',type="date", placeholder= "Datum")
         .form-group.row
         label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
         .col-sm-10
