@@ -7,14 +7,13 @@ html
           for object in exams
             div(class="card" style="width:18rem; margin:15px;")
               div(id="grabber")=object.id
-              h5(class="card-header")="Prüfungsname : "+object.name
-              div(class="card-body")
+              h5(class="card-header")=object.name
                 -var date = JSON.stringify(object.date).substring(1,11);
                 -var list = date.split("-");
                 -var newdate = list[2]+"-"+list[1]+"-"+list[0];
                 -object.date=date;
-                h5(class="card-title")=newdate
               ul(class="list-group list-group-flush")
+                li(class="list-group-item")=newdate
                 li(class="list-group-item" id="hours1")=object.total_hours
                 li(class="list-group-item" id="hours2")=object.spent_hours
                 li(class="list-group-item")="Ergebnis : "+object.status
