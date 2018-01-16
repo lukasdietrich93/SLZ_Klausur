@@ -1,0 +1,17 @@
+html
+   head
+    include header.pug
+      title Klausurplaner Startseite
+      style
+        include style.css
+      style
+   body
+      p Klausur wirklich archivieren?
+      form(action = "/examarchived/"+origin, method = "POST")
+         button.btn.btn-primary(type='submit') Klausur archivieren
+      a.btn.btn-primary(href='/overview/'+origin) Zurück 
+      a.btn.btn-primary(href='/') Logout
+      
+      
+
+         

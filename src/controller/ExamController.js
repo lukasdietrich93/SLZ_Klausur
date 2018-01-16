@@ -37,6 +37,17 @@ class ExamController {
             ctx.render('overview', { exams: exams, id: id, tip: newtip.content });
         });
     }
+    renderArchive(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = yield ctx.request.header.referer;
+            id = id.replace("http://localhost:3000/overview/", "");
+            var examcontroller = new ExamController;
+            var exams = yield examcontroller.findAllExams();
+            let tipcontroller = new TipController_1.TipController;
+            let newtip = yield tipcontroller.getRandomTip();
+            ctx.render('archiv', { exams: exams, id: id, tip: newtip.content });
+        });
+    }
     createExam(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
@@ -67,6 +78,14 @@ class ExamController {
             return allExams;
         });
     }
+    findAllExams(id = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let allExamsRepo = connection.getRepository(Exam_1.Exam);
+            let allExams = yield allExamsRepo.find();
+            return allExams;
+        });
+    }
     showDetail(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
@@ -87,6 +106,17 @@ class ExamController {
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
             yield ctx.render('deletepage', { exam: yield editedExam, origin: origin });
+        });
+    }
+    showArchive(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let id = Object.values(ctx.params)[0];
+            let origin = ctx.cookies.request.rawHeaders[11];
+            origin = origin.replace("http://localhost:3000/overview/", "");
+            let editRepo = connection.getRepository(Exam_1.Exam);
+            let editedExam = yield editRepo.findOneById(id);
+            yield ctx.render('archivepage', { exam: yield editedExam, origin: origin });
         });
     }
     editExam(ctx, next) {
@@ -122,6 +152,23 @@ class ExamController {
             var exams = examcontroller.findExams(id);
             let url = ctx.url;
             url = url.replace("/examdeleted/", "");
+            url = url.replace("?", "");
+            ctx.redirect('/overview/' + url);
+        });
+    }
+    archiveExam(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let archiveRepo = connection.getRepository(Exam_1.Exam);
+            let id = ctx.request.header.referer;
+            id = id.replace("http://localhost:3000/archivepage/", "");
+            let currentExam = yield archiveRepo.findOneById({ id: id });
+            currentExam.archived = true;
+            yield archiveRepo.save(currentExam);
+            var examcontroller = new ExamController;
+            var exams = examcontroller.findExams(id);
+            let url = ctx.url;
+            url = url.replace("/examarchived/", "");
             url = url.replace("?", "");
             ctx.redirect('/overview/' + url);
         });

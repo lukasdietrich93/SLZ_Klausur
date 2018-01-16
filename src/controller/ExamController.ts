@@ -35,6 +35,18 @@ export class ExamController {
         ctx.render('overview',{exams: exams, id: id, tip: newtip.content});
 
     }
+
+    public async renderArchive(ctx: Router.IRouterContext, next: any) {
+        let id = await ctx.request.header.referer
+        id =  id.replace("http://localhost:3000/overview/","");
+        var examcontroller = new ExamController;
+        var exams = await examcontroller.findAllExams();
+        let tipcontroller = new TipController;
+        let newtip = await tipcontroller.getRandomTip();
+        ctx.render('archiv',{exams: exams, id: id, tip: newtip.content});
+
+    }
+
     public async createExam(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         let id = ctx.cookies.request.rawHeaders[19];
@@ -62,6 +74,13 @@ export class ExamController {
         return allExams;
     }
 
+    public async findAllExams(id=null): Promise<Exam[]>{
+        const connection: Connection = await ConnectionClass.getInstance();
+        let allExamsRepo = connection.getRepository(Exam);
+        let allExams = await allExamsRepo.find()
+        return allExams;
+    }
+
     public async showDetail(ctx: Router.IRouterContext, next: any){
         const connection: Connection = await ConnectionClass.getInstance();
         let id = Object.values(ctx.params)[0];
@@ -81,6 +100,17 @@ export class ExamController {
         let editedExam = await editRepo.findOneById(id);
         await ctx.render('deletepage',{exam: await editedExam, origin: origin});
     }
+
+    public async showArchive(ctx: Router.IRouterContext, next: any){
+        const connection: Connection = await ConnectionClass.getInstance();
+        let id = Object.values(ctx.params)[0];
+        let origin =  ctx.cookies.request.rawHeaders[11]
+        origin = origin.replace("http://localhost:3000/overview/","");
+        let editRepo = connection.getRepository(Exam);
+        let editedExam = await editRepo.findOneById(id);
+        await ctx.render('archivepage',{exam: await editedExam, origin: origin});
+    }
+
     public async editExam(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
@@ -111,6 +141,22 @@ export class ExamController {
         var exams = examcontroller.findExams(id);
         let url = ctx.url;
         url = url.replace("/examdeleted/","");
+        url = url.replace("?","");
+        ctx.redirect('/overview/'+url);
+    }
+
+    public async archiveExam(ctx: Router.IRouterContext, next: any) {
+        const connection: Connection = await ConnectionClass.getInstance()
+        let archiveRepo = connection.getRepository(Exam);
+        let id = ctx.request.header.referer;
+        id = id.replace("http://localhost:3000/archivepage/","");
+        let currentExam =await archiveRepo.findOneById({id : id});
+        currentExam.archived = true;
+        await archiveRepo.save(currentExam);
+        var examcontroller = new ExamController;
+        var exams = examcontroller.findExams(id);
+        let url = ctx.url;
+        url = url.replace("/examarchived/","");
         url = url.replace("?","");
         ctx.redirect('/overview/'+url);
     }

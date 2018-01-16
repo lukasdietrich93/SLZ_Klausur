@@ -48,6 +48,12 @@ __decorate([
         default: false
     }),
     __metadata("design:type", Boolean)
+], Exam.prototype, "archived", void 0);
+__decorate([
+    typeorm_1.Column({
+        default: false
+    }),
+    __metadata("design:type", Boolean)
 ], Exam.prototype, "result_status", void 0);
 __decorate([
     typeorm_1.Column({

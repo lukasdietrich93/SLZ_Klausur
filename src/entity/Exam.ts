@@ -32,6 +32,11 @@ export class Exam {
     @Column({
         default:false
     })
+        archived: boolean;
+
+    @Column({
+        default:false
+    })
         result_status: boolean;
 
     @Column({
