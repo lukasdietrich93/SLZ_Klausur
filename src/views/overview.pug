@@ -18,11 +18,14 @@ html
                 li(class="list-group-item" id="hours1")=object.total_hours
                 li(class="list-group-item" id="hours2")=object.spent_hours
                 li(class="list-group-item")="Status : "+object.status
+                  br
+                  a(href='/editpage/'+object.id) Editieren
+                  br
+                  a(href='/deletepage/'+object.id) Löschen
                   canvas(id=""+object.id width="100" height="100")
                   div(class="donut-inner")
                     h5=object.spent_hours + " / " +object.total_hours
-              a.btn.btn-primary(href='/editpage/'+object.id) Editieren
-              a.btn.btn-primary(href='/deletepage/'+object.id) Löschen
+
                   script.
                     var id = document.getElementById("grabber").innerHTML;
                     var remove = document.getElementById("grabber");
@@ -47,5 +50,5 @@ html
 
       p
         form(action = "/addpage/"+id, method = "GET")
-          button.btn.btn-primary(type='submit') Weitere hinzufügen
-        a.btn.btn-primary(href='/') Logout
+          button.btn.btn-primary.fixed(type='submit') Add Exam
+        a.btn.btn-primary.fixed2(href='/') Logout
