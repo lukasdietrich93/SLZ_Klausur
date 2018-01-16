@@ -2,30 +2,28 @@ html
    head
     include header.pug
       title Klausurplaner Startseite
-      style 
-        include style.css
    body
    form(action = "/examedited/"+origin, method = "POST") 
         .form-group.row
         label.col-sm-2.col-form-label(for='name') Name
         .col-sm-10
-            input#inputEmail3.form-control(name='name', placeholder='Name')
+            input#inputEmail3.form-control(name='name', value=object.name)
         .form-group.row
         label.col-sm-2.col-form-label(for='name') Datum
         .col-sm-10
-            input#inputEmail3.form-control(name='date', placeholder='Datum')
+            input#inputEmail3.form-control(name='date', value=object.date)
         .form-group.row
         label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
         .col-sm-10
-            input#inputEmail3.form-control(name='total_hours', placeholder='Gesamtzahl Stunden')
+            input#inputEmail3.form-control(name='total_hours', value=object.total_hours)
         .form-group.row
         label.col-sm-2.col-form-label(for='total_hours') gearbeitete Stunden
         .col-sm-10
-            input#inputEmail3.form-control(name='spent_hours', placeholder='gearbeitete Stunden')
+            input#inputEmail3.form-control(name='spent_hours', value=object.spent_hours)
         .form-group.row
         label.col-sm-2.col-form-label(for='status') Status
         .col-sm-10
-            input#inputEmail3.form-control(name='status', placeholder='Status')
+            input#inputEmail3.form-control(name='status', value=object.status)
             fieldset.form-group
         .row
         button.btn.btn-primary(type='submit') Klausur editieren

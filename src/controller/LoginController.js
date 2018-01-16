@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const js_sha256_1 = require("js-sha256");
 const MailController_1 = require("./MailController");
+//import { Istatus } from '../entity/Exam';
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 require("reflect-metadata");

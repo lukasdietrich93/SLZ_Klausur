@@ -1,6 +1,6 @@
 import { Email } from 'sendmail';
 import { MailServer } from './../class/MailServerClass';
-import { Istatus } from '../entity/Exam';
+//import { Istatus } from '../entity/Exam';
 import { ConnectionClass } from '../class/ConnectionClass';
 import { Student } from "../entity/Student";
 import { Exam } from "../entity/Exam";

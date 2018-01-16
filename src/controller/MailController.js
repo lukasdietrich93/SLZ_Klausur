@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//import { Istatus } from '../entity/Exam';
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Student_1 = require("../entity/Student");
 require("reflect-metadata");

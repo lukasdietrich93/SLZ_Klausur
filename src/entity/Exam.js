@@ -11,13 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Student_1 = require("./Student");
-var Istatus;
-(function (Istatus) {
-    Istatus[Istatus["EXAM_DELETED"] = 0] = "EXAM_DELETED";
-    Istatus[Istatus["EXAM_ARCHIVED"] = 1] = "EXAM_ARCHIVED";
-    Istatus[Istatus["EXAM_WAITING"] = 2] = "EXAM_WAITING";
-    Istatus[Istatus["EXAM_UPCOMING"] = 3] = "EXAM_UPCOMING";
-})(Istatus = exports.Istatus || (exports.Istatus = {}));
+/*export enum Istatus{
+    EXAM_DELETED,
+    EXAM_ARCHIVED,
+    EXAM_WAITING,
+    EXAM_UPCOMING
+}*/
 let Exam = class Exam {
 };
 __decorate([
@@ -42,7 +41,7 @@ __decorate([
 ], Exam.prototype, "spent_hours", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Exam.prototype, "status", void 0);
 __decorate([
     typeorm_1.Column({

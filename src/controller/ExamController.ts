@@ -1,7 +1,7 @@
 import { Student } from './../entity/Student';
 import { TipController } from './TipController';
 import { MailController } from './MailController';
-import { Istatus } from '../entity/Exam';
+//import { Istatus } from '../entity/Exam';
 import { ConnectionClass } from '../class/ConnectionClass';
 import { Exam } from "../entity/Exam";
 import "reflect-metadata";
@@ -70,7 +70,7 @@ export class ExamController {
         const connection: Connection = await ConnectionClass.getInstance();
         let editRepo = connection.getRepository(Exam);
         let editedExam = await editRepo.findOneById(id);
-        await ctx.render('editpage',{exam: await editedExam, origin: origin});
+        await ctx.render('editpage',{exam: await editedExam, origin: origin, object: editedExam});
     }
 
     public async showDelete(ctx: Router.IRouterContext, next: any){

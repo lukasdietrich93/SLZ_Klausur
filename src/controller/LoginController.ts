@@ -1,6 +1,6 @@
 import { sha256} from 'js-sha256';
 import { MailController } from './MailController';
-import { Istatus } from '../entity/Exam';
+//import { Istatus } from '../entity/Exam';
 import { ConnectionClass } from '../class/ConnectionClass';
 import { Student } from "../entity/Student";
 import { Exam } from "../entity/Exam";

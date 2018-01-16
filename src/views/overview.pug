@@ -3,34 +3,49 @@ html
     include header.pug
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
       title Form Tester
-      style
+      script
         include style.css
    body
       p Übersicht ihrer Klausuren:
       p(class='center')="Tipp des Tages: "+tip
           for object in exams
             div(class="card" style="width:18rem; margin:15px;")
+              div(id="grabber")=object.id
               h5(class="card-header")="Prüfungsname : "+object.name
               div(class="card-body")
                 h5(class="card-title")="Datum der Prüfung : "+object.date
               ul(class="list-group list-group-flush")
-                li(class="list-group-item")="Insgesamt zu leistende Stunden : "+object.total_hours
-                li(class="list-group-item")="Bereits geleistete Stunden : "+object.spent_hours
+                li(class="list-group-item" id="hours1")=object.total_hours
+                li(class="list-group-item" id="hours2")=object.spent_hours
                 li(class="list-group-item")="Status : "+object.status
+                  canvas(id=""+object.id width="100" height="100")
+                  div(class="donut-inner")
+                    h5=object.spent_hours + " / " +object.total_hours
               a.btn.btn-primary(href='/editpage/'+object.id) Editieren
               a.btn.btn-primary(href='/deletepage/'+object.id) Löschen
+                  script.
+                    var id = document.getElementById("grabber").innerHTML;
+                    var remove = document.getElementById("grabber");
+                    remove.parentNode.removeChild(remove);
+                    var hours1 = document.getElementById("hours1").innerHTML;
+                    var removehours1 = document.getElementById("hours1");
+                    removehours1.parentNode.removeChild(removehours1);
+                    var hours2 = document.getElementById("hours2").innerHTML;
+                    var removehours2 = document.getElementById("hours2");
+                    removehours2.parentNode.removeChild(removehours2);
+                    var ctx = document.getElementById(id);
+                    var myChar = new Chart(ctx, {
+                      type: 'doughnut',
+                      data: {
+                        labels: ['gearbeitet', 'verbleibend'],
+                        datasets: [{
+                          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                          data: [hours2,hours1-hours2],
+                        }],
+
+                    }});
+
       p
         form(action = "/addpage/"+id, method = "GET")
           button.btn.btn-primary(type='submit') Weitere hinzufügen
         a.btn.btn-primary(href='/') Logout
-      canvas(id="myChart" width="100" height="100")
-      script.
-        var ctx = document.getElementById("myChart");
-        var myChar = new Chart(ctx, {
-          type: 'pie',
-          data: {
-              datasets: [{
-                  data: [5,10],
-            }],
-          labels: ['Red', 'Blue', 'Purple', 'Yellow']
-        }});

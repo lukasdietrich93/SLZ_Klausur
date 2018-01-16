@@ -1,12 +1,12 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne} from "typeorm";
 import { Student } from "./Student";
 
-export enum Istatus{
+/*export enum Istatus{
     EXAM_DELETED,
     EXAM_ARCHIVED,
     EXAM_WAITING,
     EXAM_UPCOMING
-}
+}*/
 
 @Entity()
 export class Exam {
@@ -27,7 +27,7 @@ export class Exam {
         spent_hours: number;
 
     @Column()
-        status: Istatus;
+        status: string;
 
     @Column({
         default:false

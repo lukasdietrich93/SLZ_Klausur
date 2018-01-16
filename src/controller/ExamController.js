@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const Student_1 = require("./../entity/Student");
 const TipController_1 = require("./TipController");
+//import { Istatus } from '../entity/Exam';
 const ConnectionClass_1 = require("../class/ConnectionClass");
 const Exam_1 = require("../entity/Exam");
 require("reflect-metadata");
@@ -75,7 +76,7 @@ class ExamController {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
-            yield ctx.render('editpage', { exam: yield editedExam, origin: origin });
+            yield ctx.render('editpage', { exam: yield editedExam, origin: origin, object: editedExam });
         });
     }
     showDelete(ctx, next) {
