@@ -39,10 +39,11 @@ class ExamController {
     }
     renderArchive(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            let id = yield ctx.request.header.referer;
-            id = id.replace("http://localhost:3000/overview/", "");
+            let id = yield ctx.request.url;
+            id = id.replace("/archiv/", "");
+            id = id.replace("?", "");
             var examcontroller = new ExamController;
-            var exams = yield examcontroller.findAllExams();
+            var exams = yield examcontroller.findExams(id);
             let tipcontroller = new TipController_1.TipController;
             let newtip = yield tipcontroller.getRandomTip();
             ctx.render('archiv', { exams: exams, id: id, tip: newtip.content });
@@ -106,6 +107,17 @@ class ExamController {
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
             yield ctx.render('deletepage', { exam: yield editedExam, origin: origin });
+        });
+    }
+    showReactivate(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let id = Object.values(ctx.params)[0];
+            let origin = ctx.cookies.request.rawHeaders[11];
+            origin = origin.replace("http://localhost:3000/archiv/", "");
+            let editRepo = connection.getRepository(Exam_1.Exam);
+            let editedExam = yield editRepo.findOneById(id);
+            yield ctx.render('reactivate', { exam: yield editedExam, origin: origin });
         });
     }
     showArchive(ctx, next) {
@@ -173,13 +185,28 @@ class ExamController {
             ctx.redirect('/overview/' + url);
         });
     }
+    reactivateExam(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let reactivateRepo = connection.getRepository(Exam_1.Exam);
+            let id = ctx.request.header.referer;
+            id = id.replace("http://localhost:3000/reactivate/", "");
+            console.log(id);
+            let currentExam = yield reactivateRepo.findOneById({ id: id });
+            currentExam.archived = false;
+            yield reactivateRepo.save(currentExam);
+            let url = ctx.url;
+            url = url.replace("/examreactivated/", "");
+            url = url.replace("?", "");
+            ctx.redirect('/archiv/' + url);
+        });
+    }
     findId(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
             let studentRepo = connection.getRepository(Student_1.Student);
             let mail = ctx.response.header;
             let student = yield studentRepo.findOneById({ mail: mail });
-            console.log(ctx.cookies.get("lukasdietrich@netnexus.de"));
             return student.id;
         });
     }

@@ -1,0 +1,17 @@
+html
+   head
+    include header.pug
+      title Klausurplaner Startseite
+      style
+        include style.css
+      style
+   body
+      p Klausur wirklich reaktivieren?
+      form(action = "/examreactivated/"+origin, method = "POST")
+         button.btn.btn-primary(type='submit') Klausur reaktivieren
+      a.btn.btn-primary(href='/archiv/'+origin) Zurück 
+      a.btn.btn-primary(href='/') Logout
+      
+      
+
+         

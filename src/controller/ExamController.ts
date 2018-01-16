@@ -37,10 +37,11 @@ export class ExamController {
     }
 
     public async renderArchive(ctx: Router.IRouterContext, next: any) {
-        let id = await ctx.request.header.referer
-        id =  id.replace("http://localhost:3000/overview/","");
+        let id = await ctx.request.url
+        id =  id.replace("/archiv/","");
+        id =  id.replace("?","");
         var examcontroller = new ExamController;
-        var exams = await examcontroller.findAllExams();
+        var exams = await examcontroller.findExams(id);
         let tipcontroller = new TipController;
         let newtip = await tipcontroller.getRandomTip();
         ctx.render('archiv',{exams: exams, id: id, tip: newtip.content});
@@ -101,6 +102,16 @@ export class ExamController {
         await ctx.render('deletepage',{exam: await editedExam, origin: origin});
     }
 
+    public async showReactivate(ctx: Router.IRouterContext, next: any){
+        const connection: Connection = await ConnectionClass.getInstance();
+        let id = Object.values(ctx.params)[0];
+        let origin =  ctx.cookies.request.rawHeaders[11]
+        origin = origin.replace("http://localhost:3000/archiv/","");
+        let editRepo = connection.getRepository(Exam);
+        let editedExam = await editRepo.findOneById(id);
+        await ctx.render('reactivate',{exam: await editedExam, origin: origin});
+    }
+
     public async showArchive(ctx: Router.IRouterContext, next: any){
         const connection: Connection = await ConnectionClass.getInstance();
         let id = Object.values(ctx.params)[0];
@@ -110,6 +121,7 @@ export class ExamController {
         let editedExam = await editRepo.findOneById(id);
         await ctx.render('archivepage',{exam: await editedExam, origin: origin});
     }
+
 
     public async editExam(ctx: Router.IRouterContext, next: any) {
         const connection: Connection = await ConnectionClass.getInstance();
@@ -160,12 +172,27 @@ export class ExamController {
         url = url.replace("?","");
         ctx.redirect('/overview/'+url);
     }
+
+    public async reactivateExam(ctx: Router.IRouterContext, next: any) {
+        const connection: Connection = await ConnectionClass.getInstance()
+        let reactivateRepo = connection.getRepository(Exam);
+        let id = ctx.request.header.referer;
+        id = id.replace("http://localhost:3000/reactivate/","");
+        console.log(id);
+        let currentExam =await reactivateRepo.findOneById({id : id});
+        currentExam.archived = false;
+        await reactivateRepo.save(currentExam);
+        let url = ctx.url;
+        url = url.replace("/examreactivated/","");
+        url = url.replace("?","");
+        ctx.redirect('/archiv/'+url);
+    }
+
     public async findId(ctx: Router.IRouterContext, next: any): Promise<any> {
         const connection: Connection = await ConnectionClass.getInstance()
         let studentRepo = connection.getRepository(Student);
         let mail = ctx.response.header
         let student = await studentRepo.findOneById({mail: mail})
-        console.log(ctx.cookies.get("lukasdietrich@netnexus.de"));
         return student.id;
 
     }

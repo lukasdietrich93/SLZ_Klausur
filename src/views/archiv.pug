@@ -19,10 +19,6 @@ html
                   li(class="list-group-item" id="hours2")=object.spent_hours
                   li(class="list-group-item")="Ergebnis : "+object.status
                     br
-                    a(href='/editpage/'+object.id) Editieren
-                    br
-                    a(href='/deletepage/'+object.id) Löschen
-                    br
                     a(href='/reactivate/'+object.id) Aktivieren
                     canvas(id=""+object.id width="100" height="100")
                     div(class="donut-inner")
