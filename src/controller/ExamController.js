@@ -90,12 +90,14 @@ class ExamController {
     showDetail(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let id2 = ctx.request.header.referer;
+            id2 = id2.replace("http://localhost:3000/overview/", "");
             let id = Object.values(ctx.params)[0];
             let origin = ctx.cookies.request.rawHeaders[11];
             origin = origin.replace("http://localhost:3000/overview/", "");
             let editRepo = connection.getRepository(Exam_1.Exam);
             let editedExam = yield editRepo.findOneById(id);
-            yield ctx.render('editpage', { exam: yield editedExam, origin: origin, object: editedExam });
+            yield ctx.render('editpage', { exam: yield editedExam, origin: origin, object: editedExam, id2: id2 });
         });
     }
     showDelete(ctx, next) {

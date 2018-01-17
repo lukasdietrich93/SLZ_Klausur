@@ -14,11 +14,11 @@ html
         .form-group.row
         label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
         .col-sm-10
-            input#inputEmail3.form-control(name='total_hours', placeholder='Gesamtzahl Stunden')
+            input#inputEmail3.form-control(name='total_hours',type="number", min="0", max="999", placeholder='Gesamtzahl Stunden')
         .form-group.row
         label.col-sm-2.col-form-label(for='total_hours') gearbeitete Stunden
         .col-sm-10
-            input#inputEmail3.form-control(name='spent_hours', placeholder='gearbeitete Stunden')
+            input#inputEmail3.form-control(name='spent_hours',type="number", min="0", max="999", placeholder='gearbeitete Stunden')
         .form-group.row
         label.col-sm-2.col-form-label(for='status') Ergebnis
         .col-sm-10
@@ -26,3 +26,4 @@ html
             fieldset.form-group
         .row
         button.btn.btn-primary(type='submit') Klausur erstellen
+        a.btn.btn-primary(href="/overview/"+id) Zurück

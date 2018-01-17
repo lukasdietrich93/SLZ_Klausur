@@ -84,12 +84,14 @@ export class ExamController {
 
     public async showDetail(ctx: Router.IRouterContext, next: any){
         const connection: Connection = await ConnectionClass.getInstance();
+        let id2 = ctx.request.header.referer;
+        id2 = id2.replace("http://localhost:3000/overview/","");
         let id = Object.values(ctx.params)[0];
         let origin =  ctx.cookies.request.rawHeaders[11]
         origin = origin.replace("http://localhost:3000/overview/","");
         let editRepo = connection.getRepository(Exam);
         let editedExam = await editRepo.findOneById(id);
-        await ctx.render('editpage',{exam: await editedExam, origin: origin, object: editedExam});
+        await ctx.render('editpage',{exam: await editedExam, origin: origin, object: editedExam,id2: id2});
     }
 
     public async showDelete(ctx: Router.IRouterContext, next: any){
