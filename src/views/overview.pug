@@ -15,7 +15,7 @@ html
       p Anstehende Klausuren:
           for object in exams
             -var objectdate = new Date(object.date).getTime();
-            if(today < objectdate)
+            if(today < objectdate+86400000)
               -var x = Math.floor((objectdate - today)/86400000);
               div(class="card" style="width:18rem; margin:15px;")
                 div(id="grabber")=object.id
@@ -32,6 +32,7 @@ html
                     a(class="clicked2" href='/editpage/'+object.id) Editieren
                     a(class="clicked" href="/deletepage/"+object.id) Löschen
                     br
+                    -x=x+1;
                     p(id='remaining')="Es verbleiben "+x+" Tage"
                     br
                     canvas(id=""+object.id width="100" height="100")

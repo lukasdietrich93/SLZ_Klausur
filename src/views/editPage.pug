@@ -13,13 +13,12 @@ html
         .col-sm-10
             input#inputEmail3.form-control(name='date',type="date", value=JSON.stringify(object.date).substring(1,11))
         .form-group.row
-        label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
-        .col-sm-10
-            input#inputEmail3.form-control(name='total_hours',type="number", min="0", max="999", value=object.total_hours)
-        .form-group.row
-        label.col-sm-2.col-form-label(for='total_hours') gearbeitete Stunden
-        .col-sm-10
-            input#inputEmail3.form-control(name='spent_hours', type="number", min="0", max="999", value=object.spent_hours)
+        p Aufwand in h
+        div
+            label.col-sm-2.col-form-label.number(for='date') Soll
+                input#inputEmail3.form-control.number(name='total_hours',type="number", min="0", max="999", value=object.total_hours)
+            label.col-sm-2.col-form-label.number(for='total_hours') Ist
+                input#inputEmail3.form-control.number(name='spent_hours', type="number", min="0", max="999", value=object.spent_hours)
         .form-group.row
         label.col-sm-2.col-form-label(for='status') Ergebnis
         .col-sm-10

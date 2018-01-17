@@ -180,7 +180,6 @@ export class ExamController {
         let reactivateRepo = connection.getRepository(Exam);
         let id = ctx.request.header.referer;
         id = id.replace("http://localhost:3000/reactivate/","");
-        console.log(id);
         let currentExam =await reactivateRepo.findOneById({id : id});
         currentExam.archived = false;
         await reactivateRepo.save(currentExam);

@@ -193,7 +193,6 @@ class ExamController {
             let reactivateRepo = connection.getRepository(Exam_1.Exam);
             let id = ctx.request.header.referer;
             id = id.replace("http://localhost:3000/reactivate/", "");
-            console.log(id);
             let currentExam = yield reactivateRepo.findOneById({ id: id });
             currentExam.archived = false;
             yield reactivateRepo.save(currentExam);

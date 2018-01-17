@@ -12,13 +12,13 @@ html
         .col-sm-10
             input#inputEmail3.form-control(name='date',type="date", placeholder= "Datum")
         .form-group.row
-        label.col-sm-2.col-form-label(for='date') Gesamtzahl Stunden
-        .col-sm-10
-            input#inputEmail3.form-control(name='total_hours',type="number", min="0", max="999", placeholder='Gesamtzahl Stunden')
-        .form-group.row
-        label.col-sm-2.col-form-label(for='total_hours') gearbeitete Stunden
-        .col-sm-10
-            input#inputEmail3.form-control(name='spent_hours',type="number", min="0", max="999", placeholder='gearbeitete Stunden')
+        p Aufwand in h
+        div
+            label.col-sm-2.col-form-label.number(for='date') Soll
+                input#inputEmail3.form-control.number(name='total_hours',type="number", min="0", max="999", placeholder = "")
+            label.col-sm-2.col-form-label.number(for='total_hours') Ist
+                input#inputEmail3.form-control.number(name='spent_hours', type="number", min="0", max="999", placeholder = "")
+        
         .form-group.row
         label.col-sm-2.col-form-label(for='status') Ergebnis
         .col-sm-10

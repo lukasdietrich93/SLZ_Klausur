@@ -16,6 +16,8 @@ html
           for object in exams
             -var objectdate = new Date(object.date).getTime();
             if(today > objectdate)
+              -console.log(today);
+              -console.log(objectdate);
               -var x = Math.floor((today - objectdate)/86400000);
               div(class="card" style="width:18rem; margin:15px;")
                 div(id="grabber")=object.id
