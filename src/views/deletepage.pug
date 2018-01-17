@@ -4,13 +4,22 @@ html
       title Klausurplaner Startseite
       style
         include style.css
-      style
+      style.
+        .hidden{
+          display:none
+        }
    body
-      p Klausur wirklich löschen?
+      -console.log(origin);
+      -var substring = "archiv";
+      if(origin.includes(substring))
+        -origin = origin.replace("http://localhost:3000/archiv/","");
+        -console.log(origin);
       form(action = "/examdeleted/"+origin, method = "POST")
-         button.btn.btn-primary(type='submit') Klausur löschen
-      a.btn.btn-primary(href='/overview/'+origin) Zurück 
-      a.btn.btn-primary(href='/') Logout
+         button.btn.btn-primary.hidden(id="watchButton" type='submit')
+      script.
+        $(function() {
+          $('#watchButton').click();
+        });
       
       
 
