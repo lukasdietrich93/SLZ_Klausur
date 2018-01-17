@@ -36,6 +36,21 @@ class MailController {
             }
         });
     }
+    sendForgotLink(receiver, link) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield ConnectionClass_1.ConnectionClass.getInstance();
+            let studentRepo = connection.getRepository(Student_1.Student);
+            const student = yield studentRepo.findOne({ mail: receiver });
+            if (student) {
+                sendmail({
+                    from: "Klausurplaner@SLZ.de",
+                    to: receiver,
+                    subject: "Password Recovery SLZ",
+                    html: "Klicken Sie folgenden Link um ein neues Passwort zu setzen: "
+                });
+            }
+        });
+    }
 }
 exports.MailController = MailController;
 //# sourceMappingURL=MailController.js.map

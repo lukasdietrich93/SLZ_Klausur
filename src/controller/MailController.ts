@@ -34,4 +34,17 @@ export class MailController{
            return 0;
         }
     }
+    public async sendForgotLink(receiver, link):Promise<any>{
+        const connection: Connection = await ConnectionClass.getInstance();
+        let studentRepo = connection.getRepository(Student);
+        const student = await studentRepo.findOne({ mail: receiver});
+        if(student){
+            sendmail({
+                from: "Klausurplaner@SLZ.de",
+                to: receiver,
+                subject: "Password Recovery SLZ",
+                html: "Klicken Sie folgenden Link um ein neues Passwort zu setzen: "
+            })
+        }
+    }
 }
